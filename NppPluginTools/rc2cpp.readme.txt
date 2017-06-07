@@ -1,0 +1,26 @@
+rc2cpp.bat is a script that converts a <PLUGIN_RESOURCE>.rc file
+into a configuration <PLUGIN_RESOURCE>.cpp file
+suitable for the Notepad++ Build Environment Plugin.
+
+The plugin name is derived from <PLUGIN_RESOURCE>.
+
+Dialog configuration structure names are derived from the CAPTION sections of the rc file.
+
+COMBOBOXes are used to indicate the current value of respective environment variables.
+
+A COMBOBOX ID must be of the form:
+
+ID_<VAR_NAME>_<TYPE>BOX
+
+Where <TYPE> is a 1 character COMBOBOX type of which 3 are supported:
+
+C) Normal text entry;
+F) File entry;
+D) Directory entry;
+
+For file and directory entries an associated button is required to be called:
+
+ID_<VAR_NAME>_BTTN
+
+For directories any drive letter is extracted and stored in the environment variable
+<VAR_NAME> with the 4 - 6 characters of the name replaced by the characters DRV.

@@ -1,0 +1,19 @@
+PRJDIR,"C:\Users\%USERNAME%\Documents\My Projects"
+TMPDIR,"C:\Users\%USERNAME%\Documents\My Projects\Temp"
+SIMDIR,"C:\Users\%USERNAME%\Documents\My Projects\Tools"
+BATDIR,"C:\Users\%USERNAME%\Documents\My Projects\OBC_tools\WXD-Build-Scripts"
+PUTDIR,"C:\Program Files (x86)\PUTTY"
+TTLDIR "C:\Program Files (x86)\teraterm"
+CYGDIR,"C:\cygwin64"
+PYTDIR,"C:\Python27"
+TGZDIR,"\sw_builds\htc_classic"
+SCRDIR,"home/scripts"
+LUADIR,"lua"
+TGZDRV,Q
+MAPDRV,P
+TLSDRV,C
+IPSSIM,ipsignsim
+PYTEXE,python2.7.exe
+PLKEXE,plink.exe
+PCPEXE,pscp.exe
+TTLEXE,ttpmacro.exe

@@ -1,0 +1,10 @@
+npp_saveall
+set ENVDIR=D:\Projects\Env
+set TLSDIR=D:\Projects\Tools\Scripts
+"$(TLSDIR)\setenv.bat" "$(ENVDIR)" "$(TLSDIR)" "$(ENVDIR)\bldenv.bat" "$(TLSDIR)\genhdr.bat" bld dir exe msc sql cst
+"$(TLSDIR)\setenv.bat" "$(ENVDIR)\envbld.lst" "$(ENVDIR)\bldenv.bat" "$(ENVDIR)" "$(TLSDIR)" "$(TLSDIR)\genhdr.bat"
+"$(TLSDIR)\setenv.bat" "$(ENVDIR)\envdir.lst" "$(ENVDIR)\bldenv.bat" "$(ENVDIR)" "$(TLSDIR)"
+"$(TLSDIR)\setenv.bat" "$(ENVDIR)\envexe.lst" "$(ENVDIR)\bldenv.bat" "$(ENVDIR)" "$(TLSDIR)"
+"$(TLSDIR)\setenv.bat" "$(ENVDIR)\envmsc.lst" "$(ENVDIR)\bldenv.bat" "$(ENVDIR)" "$(TLSDIR)"
+"$(TLSDIR)\setenv.bat" "$(ENVDIR)\envsql.lst" "$(ENVDIR)\bldenv.bat" "$(ENVDIR)" "$(TLSDIR)"
+"$(TLSDIR)\setenv.bat" "$(ENVDIR)\envcst.lst" "$(ENVDIR)\bldenv.bat" "$(ENVDIR)" "$(TLSDIR)"

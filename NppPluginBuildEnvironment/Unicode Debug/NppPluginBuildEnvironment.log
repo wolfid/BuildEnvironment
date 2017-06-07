@@ -1,0 +1,34 @@
+﻿Build started 05/09/2015 16:38:52.
+     1>Project "D:\Projects\OBC_tools\NppPluginBuildEnvironment\NppPluginBuildEnvironment.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I.\DockingFeature /I.\ /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D NPPPluginBuildEnvironment_EXPORTS /D __STDC_WANT_SECURE_LIB__=0 /D _CRT_NONSTDC_NO_DEPRECATE /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Unicode Debug\\" /Fd"Unicode Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt DockingFeature\SettingsDlg.cpp
+         SettingsDlg.cpp
+     1>DockingFeature\SettingsDlg.cpp(133): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\stdlib.h(1183): note: see declaration of 'getenv'
+     1>DockingFeature\SettingsDlg.cpp(203): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+     1>DockingFeature\SettingsDlg.cpp(251): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+     1>DockingFeature\SettingsDlg.cpp(318): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+     1>DockingFeature\SettingsDlg.cpp(338): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\stdio.h(240): note: see declaration of 'freopen'
+     1>DockingFeature\SettingsDlg.cpp(343): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+     1>DockingFeature\SettingsDlg.cpp(389): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+     1>DockingFeature\SettingsDlg.cpp(405): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Projects\OBC_tools\NppPluginBuildEnvironment\Unicode Debug\plugins\NppPluginBuildEnvironment_Debug.dll" /INCREMENTAL /NOLOGO shlwapi.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Projects\OBC_tools\NppPluginBuildEnvironment\Unicode Debug\plugins\NppPluginBuildEnvironment.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Projects\OBC_tools\NppPluginBuildEnvironment\Unicode Debug\plugins\NppPluginBuildEnvironment.lib" /MACHINE:X86 /SAFESEH /DLL "Unicode Debug\NppPluginBuildEnvironmentResource.res"
+         "Unicode Debug\SettingsDlg.obj"
+         "Unicode Debug\StaticDialog.obj"
+         "Unicode Debug\NppPluginBuildEnvironment.obj"
+         "Unicode Debug\NppPluginBuildEnvironmentMain.obj"
+         "Unicode Debug\NppPluginBuildEnvironmentResource.obj"
+         NppPluginBuildEnvironment.vcxproj -> D:\Projects\OBC_tools\NppPluginBuildEnvironment\Unicode Debug\plugins\NppPluginBuildEnvironment_Debug.dll
+     1>Done Building Project "D:\Projects\OBC_tools\NppPluginBuildEnvironment\NppPluginBuildEnvironment.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.98

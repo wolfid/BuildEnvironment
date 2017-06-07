@@ -1,0 +1,32 @@
+TGTDIR,htc
+TGTPFM,arm
+TGTTGZ,main
+TGZFIL,htc.tgz
+BLDUSR,%USERNAME%
+BLDADR,192.168.56.101
+BLDPWD,xxxxxxxx
+; Hogia:
+; BLDBRA,SR1416-Hogia
+; Movia:
+; BLDBRA,CR9367-Video_Noise
+; TGZVER,1_11_0_ALPHA1_
+; TGTADR,192.168.0.246
+BLDBRA,SR1497-Movia_Additions
+TGZVER,1_6_0_BACKKEY_
+TGTADR,192.168.2.153
+; BLDBRA,SR1497-Movia_Sub_Menus
+; BLDBRA,movia_viu_logging
+; BLDBRA,trunk
+; TGZVER,1_11_0_ALPHA1_
+; TGTADR,192.168.0.246
+; BLDBRA,trunk1580
+; Delijn, gps_module_change, sub_menus
+; BLDBRA,gps_module_change
+; BLDBRA,SR1351-Delijn
+; BLDBRA,sub_menus
+; TGZVER,1_11_0_ALPHA1_
+; TGTADR,192.168.0.246
+; SDTest:
+; TGTADR,192.168.1.153
+; Repair:
+; TGTADR,192.168.1.183

@@ -1,0 +1,7 @@
+rc2hpp.bat is a script that converts a <PLUGIN_RESOURCE>.rc file
+into a configuration <PLUGIN_RESOURCE>.hpp file
+suitable for the Notepad++ Build Environment Plugin.
+
+Dialog IDs are derived from the CAPTION sections of the rc file.
+
+Other IDs are derived from COMBOBOX, LTEXT, DEFPUSHBUTTON.

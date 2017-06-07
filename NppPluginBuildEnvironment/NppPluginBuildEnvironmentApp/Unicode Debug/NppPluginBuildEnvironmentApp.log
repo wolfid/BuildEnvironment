@@ -1,0 +1,9 @@
+﻿Build started 13/09/2015 22:08:04.
+     1>Project "D:\Projects\OBC_tools\NppPluginBuildEnvironment\NppPluginBuildEnvironmentApp\NppPluginBuildEnvironmentApp.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         NppPluginBuildEnvironmentApp.vcxproj -> D:\Projects\OBC_tools\NppPluginBuildEnvironment\Unicode Debug\NppPluginBuildEnvironmentApp.exe
+     1>Done Building Project "D:\Projects\OBC_tools\NppPluginBuildEnvironment\NppPluginBuildEnvironmentApp\NppPluginBuildEnvironmentApp.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.96

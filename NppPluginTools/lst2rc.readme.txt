@@ -1,0 +1,3 @@
+lst2rc.bat is a script that converts a <PLUGIN_RESOURCE>.lst file
+into a configuration <PLUGIN_RESOURCE>.rc file
+suitable for the Notepad++ Build Environment Plugin.

@@ -1,0 +1,11 @@
+; DBWDIR,readwrite
+; DBWFIL,HTCRW.db
+; LOGDIR,readwrite
+; LOGFIL,htc_out.log
+; LOGFIL,eric.log
+; LOGFIL,external_led.log
+; LOGFIL,vga.log
+; LOGFIL,gps.log
+LTZCON,Europe
+LTZCIT,London
+; MOVLOG,movia_logs

@@ -1,0 +1,8 @@
+in </Category><Category name="Environment_Expansions" after </ModifyRegisteredTool> insert:
+
+<UserCreatedTool><Arguments>$(ProjectDir)$(ProjectFileName)</Arguments><CloseOnExit>true</CloseOnExit><Command>D:\Projects\tools\NppPluginTools\proj2res.bat</Command><Index>5</Index><InitialDirectory></InitialDirectory><IsGUIapp>false</IsGUIapp><NameID>0</NameID><Package>{00000000-0000-0000-0000-000000000000}</Package><PromptForArguments>false</PromptForArguments><SaveAllDocs>true</SaveAllDocs><Title>Proj2Res</Title><Unicode>false</Unicode><UseOutputWindow>true</UseOutputWindow><UseTaskList>false</UseTaskList></UserCreatedTool>
+<UserCreatedTool><Arguments>$(ProjectDir)\setup\$(ProjectFileName).iss</Arguments><CloseOnExit>true</CloseOnExit><Command>C:\Program Files (x86)\Inno Setup 5\ISCC.exe</Command><Index>6</Index><InitialDirectory></InitialDirectory><IsGUIapp>false</IsGUIapp><NameID>0</NameID><Package>{00000000-0000-0000-0000-000000000000}</Package><PromptForArguments>false</PromptForArguments><SaveAllDocs>true</SaveAllDocs><Title>Make Setup</Title><Unicode>false</Unicode><UseOutputWindow>true</UseOutputWindow><UseTaskList>false</UseTaskList></UserCreatedTool>
+<UserCreatedTool><Arguments>$(ProjectDir)</Arguments><CloseOnExit>false</CloseOnExit><Command>D:\Projects\tools\NppPluginTools\setup.bat</Command><Index>7</Index><InitialDirectory></InitialDirectory><IsGUIapp>false</IsGUIapp><NameID>0</NameID><Package>{00000000-0000-0000-0000-000000000000}</Package><PromptForArguments>false</PromptForArguments><SaveAllDocs>true</SaveAllDocs><Title>Setup</Title><Unicode>false</Unicode><UseOutputWindow>true</UseOutputWindow><UseTaskList>false</UseTaskList></UserCreatedTool>
+
+modifying indexes appropriately...
+        

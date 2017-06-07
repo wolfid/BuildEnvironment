@@ -1,0 +1,7 @@
+﻿  stdafx.cpp
+  NppPluginBuildEnvironmentApp.cpp
+  Generating code
+  All 5 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  NppPluginBuildEnvironmentApp.vcxproj -> D:\Projects\tools\NppPluginBuildEnvironment\Unicode Release\NppPluginBuildEnvironmentApp.exe
+  NppPluginBuildEnvironmentApp.vcxproj -> D:\Projects\tools\NppPluginBuildEnvironment\Unicode Release\NppPluginBuildEnvironmentApp.pdb (Full PDB)

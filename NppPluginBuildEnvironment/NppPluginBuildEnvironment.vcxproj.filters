@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+    <Filter Include="Script Files">
+      <UniqueIdentifier>{e7198e4a-9410-4a09-827d-3378eebe7123}</UniqueIdentifier>
+      <Extensions>*.bat</Extensions>
+    </Filter>
+    <Filter Include="Setup Files">
+      <UniqueIdentifier>{a4119c63-6793-40ce-a6ba-4d97411b9c83}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="menuCmdID.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Notepad_plus_msgs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PluginInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scintilla.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DockingFeature\SettingsDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NppPluginBuildEnvironmentResource.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="NppPluginBuildEnvironmentMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DockingFeature\StaticDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DockingFeature\SettingsDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NppPluginBuildEnvironmentResource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NppPluginBuildEnvironment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NppPluginBuildEnvironmentResource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="setup\NppPluginBuildEnvironment.vcxproj.iss">
+      <Filter>Setup Files</Filter>
+    </None>
+    <None Include="..\NppPluginTools\lst2rc.bat">
+      <Filter>Script Files</Filter>
+    </None>
+    <None Include="..\NppPluginTools\rc2cpp.bat">
+      <Filter>Script Files</Filter>
+    </None>
+    <None Include="..\NppPluginTools\rc2hpp.bat">
+      <Filter>Script Files</Filter>
+    </None>
+    <None Include="NppPluginBuildEnvironmentResource.lst">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\NppPluginTools\lst2rc.readme.txt">
+      <Filter>Script Files</Filter>
+    </Text>
+    <Text Include="..\NppPluginTools\rc2cpp.readme.txt">
+      <Filter>Script Files</Filter>
+    </Text>
+    <Text Include="..\NppPluginTools\rc2hpp.readme.txt">
+      <Filter>Script Files</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

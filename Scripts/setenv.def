@@ -1,0 +1,63 @@
+; Example environment variable listing...
+; Edit this appropriately and rename it: setenv.lst...
+; Try not to check in anything sensitive...
+;
+; Tool settings...
+;
+PYTDIR,"C:\Python27"
+PYTEXE,"python2.7.exe"
+PRJDIR,"C:\Users\%USERNAME%\Documents\My Projects"
+TMPDIR,"C:\Users\%USERNAME%\Documents\My Projects\Temp"
+SIMDIR,"C:\Users\%USERNAME%\Documents\My Projects\Tools"
+IPSSIM,ipsignsim
+CYGDIR,"C:\cygwin64"
+PUTDIR,"C:\Program Files (x86)\PUTTY"
+PLKEXE,plink.exe
+PCPEXE,pscp.exe
+;
+; HTC settings...
+;
+HTCUSR,root
+HTCADR,192.168.0.246
+HTCDIR,htc
+HTCPFM,arm
+HTCTGZ,main
+;
+; Database settings...
+;
+DBSDIR,database
+DBSFIL,HTC.db
+;
+; Log settings...
+;
+LOGDIR,readwrite
+; LOGFIL,htc_out.log
+;
+; Build machine settings...
+;
+BLDUSR,%USERNAME%
+BLDADR,192.168.56.101
+BLDPWD,xxxxxxxx
+; BLDBRA,SR1416-Hogia
+; BLDBRA,SR1497-Movia_Additions
+BLDBRA,delijn
+;
+; Host machine settings...
+;
+MAPDRV,P
+NTSCMD,"runas /user:administrator netsh"
+LOCADR,192.168.0.247
+LOCCON,"Local Area Connection 2"
+LOCGAT,192.168.0.1
+;
+; Debug logs...
+;
+LOGCNT,4
+LOGMOD1,ERIC
+LOGVAL1,DEBUG_INFO
+LOGMOD2,VIU
+LOGVAL2,DEBUG_INFO
+LOGMOD3,EXTERNAL_LED_PRESENTATION_IF5
+LOGVAL3,DEBUG_INFO
+LOGMOD4,INTERNAL_LED_PRESENTATION_IF4
+LOGVAL4,DEBUG_INFO
