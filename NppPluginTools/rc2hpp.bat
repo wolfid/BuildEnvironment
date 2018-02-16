@@ -1,32 +1,20 @@
 @echo off
-for /f "tokens=1,2,3 delims=/" %%a in ("%~t0") do (set day=%%a && set /a month=%%b && set year=%%c)
-for /f "tokens=%month%" %%a in ("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec") do set month=%%a
-echo #########################################################################
-echo ###  _     _                                                          ###
-echo ### ^| ^|   ^| ^|___ _   ___ ___  ___ _ __  ___                           ###
-echo ### ^| ^| _ ^| / _ \ ^| ^| __/ _ \^|__ \ '_ \/ _ \                          ###
-echo ### ^| ^|^| ^|^|  (_)  ^|_^| _^|\__^| / _   ^| ^| \__^| ^|                         ###
-echo ### ^|___ ___\___/___^|_^| ^|___/\___/_^| ^|_^|___/                          ###
-echo ###                ____                                               ###
-echo ###               ^|  _ \_   _ _ __  ___  _ ___ _ __                   ###
-echo ###               ^| ^| \ \^| ^| ^| '_ \/ __^|^| / _ \ '_ \                  ###
-echo ###               ^| ^|_/ /^|_^| ^| ^| ^| \__ /_  (_)  ^| ^| ^|                 ###
-echo ###               ^|____/\__'_^|_^| ^|_^|___\__\___/_^| ^|_^|                 ###
-echo ###                                                                   ###
-echo ### Copyright (c) %year:~0,4% Wolfgang Dunsdon.                              ###
-echo ### All rights reserved.                                              ###
-echo ###                                                                   ###
-echo ###                                                       %day%%month% %year:~0,4% ###
-echo ###                                                                   ###
-echo ###                                                  @file %~n0%~x0 ###
-echo ###                                                                   ###
-echo ### @brief Generate header from resource File...                      ###
-echo ###                                                                   ###
-echo ### @see %~n0.readme.txt for details.                               ###
-echo ###                                                                   ###
-echo ### @param %%1 - Resource file                                         ###
-echo ###                                                                   ###
-echo #########################################################################
+echo ###########################################################
+echo ###      _      __  ___                   __            ###
+echo ###     ^| ^| /^| / / / _ \__ _____  ___ ___/ /__  ___     ###
+echo ###     ^| ^|/ ^|/ / / // / // / _ \(_-^</ _  / _ \/ _ \    ###
+echo ###     ^|__/^|__(_)____/\_,_/_//_/___/\_,_/\___/_//_/    ###
+echo ###                                                     ###
+echo ###                                          %~nx0 ###
+echo ###                                    %~t0 ###
+echo ###                                                     ###
+echo ### @brief Generate Config HPP from Resource File...    ###
+echo ###                                                     ###
+echo ### @see %~n0.readme.txt for details.                 ###
+echo ###                                                     ###
+echo ### @param %%1 - Resource file                           ###
+echo ###                                                     ###
+echo ###########################################################
 if [%1] equ [] goto :ERROR_NO_RC
 if [%~x1] neq [.rc] goto :ERROR_NO_RC
 set RCFILE=%~n1

@@ -1,32 +1,20 @@
 @echo off
-for /f "tokens=1,2,3 delims=/" %%a in ("%~t0") do (set day=%%a && set /a month=%%b && set year=%%c)
-for /f "tokens=%month%" %%a in ("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec") do set month=%%a
-echo #########################################################################
-echo ###  _     _                                                          ###
-echo ### ^| ^|   ^| ^|___ _   ___ ___  ___ _ __  ___                           ###
-echo ### ^| ^| _ ^| / _ \ ^| ^| __/ _ \^|__ \ '_ \/ _ \                          ###
-echo ### ^| ^|^| ^|^|  (_)  ^|_^| _^|\__^| / _   ^| ^| \__^| ^|                         ###
-echo ### ^|___ ___\___/___^|_^| ^|___/\___/_^| ^|_^|___/                          ###
-echo ###                ____                                               ###
-echo ###               ^|  _ \_   _ _ __  ___  _ ___ _ __                   ###
-echo ###               ^| ^| \ \^| ^| ^| '_ \/ __^|^| / _ \ '_ \                  ###
-echo ###               ^| ^|_/ /^|_^| ^| ^| ^| \__ /_  (_)  ^| ^| ^|                 ###
-echo ###               ^|____/\__'_^|_^| ^|_^|___\__\___/_^| ^|_^|                 ###
-echo ###                                                                   ###
-echo ### Copyright (c) %year:~0,4% Wolfgang Dunsdon.                              ###
-echo ### All rights reserved.                                              ###
-echo ###                                                                   ###
-echo ###                                                       %day%%month% %year:~0,4% ###
-echo ###                                                                   ###
-echo ###                                                  @file %~n0%~x0 ###
-echo ###                                                                   ###
-echo ### @brief Generate resource file from list file...                   ###
-echo ###                                                                   ###
-echo ### @see %~n0.readme.txt for details.                               ###
-echo ###                                                                   ###
-echo ### @param %%1 - List file                                             ###
-echo ###                                                                   ###
-echo #########################################################################
+echo ###########################################################
+echo ###      _      __  ___                   __            ###
+echo ###     ^| ^| /^| / / / _ \__ _____  ___ ___/ /__  ___     ###
+echo ###     ^| ^|/ ^|/ / / // / // / _ \(_-^</ _  / _ \/ _ \    ###
+echo ###     ^|__/^|__(_)____/\_,_/_//_/___/\_,_/\___/_//_/    ###
+echo ###                                                     ###
+echo ###                                          %~nx0 ###
+echo ###                                    %~t0 ###
+echo ###                                                     ###
+echo ### @brief Generate Resource File from Config LST...    ###
+echo ###                                                     ###
+echo ### @see %~n0.readme.txt for details.                 ###
+echo ###                                                     ###
+echo ### @param %%1 - LST file                                ###
+echo ###                                                     ###
+echo ###########################################################
 if [%1] equ [] goto :ERROR_NO_LST
 if [%~x1] neq [.lst] goto :ERROR_NO_LST
 set LSTFILE=%~n1
@@ -107,14 +95,17 @@ if "%~1" equ "%DIALOG%" ( goto :DIALOG
 exit /b 0
 :DIALOG
 if "%YPOS%" neq "%YINC%" call :DIALOG_END
-echo %~2 DIALOGEX %XDLG% %YDLG% %WDLG% %HDLG%>> "%RCOUT%"
-echo ### %~2 DIALOGEX %XDLG% %YDLG% %WDLG% %HDLG%
+set DIALOG_ID=%2
+set DIALOG_ID=%DIALOG_ID: =_%
+set DIALOG_ID=IDD_%DIALOG_ID:"=%
+echo %DIALOG_ID% DIALOGEX %XDLG% %YDLG% %WDLG% %HDLG%>> "%RCOUT%"
+echo ### %DIALOG_ID% DIALOGEX %XDLG% %YDLG% %WDLG% %HDLG%
 echo STYLE DS_SETFONT ^| DS_FIXEDSYS ^| WS_POPUP ^| WS_CAPTION ^| WS_SYSMENU>> "%RCOUT%"
 echo ### STYLE DS_SETFONT ^| DS_FIXEDSYS ^| WS_POPUP ^| WS_CAPTION ^| WS_SYSMENU
 echo EXSTYLE WS_EX_TOOLWINDOW ^| WS_EX_WINDOWEDGE>> "%RCOUT%"
 echo ### EXSTYLE WS_EX_TOOLWINDOW ^| WS_EX_WINDOWEDGE
-echo CAPTION %3>> "%RCOUT%"
-echo ### CAPTION %3
+echo CAPTION %2>> "%RCOUT%"
+echo ### CAPTION %2
 echo FONT %HCHR%, "MS Sans Serif", 0, 0, 0x0>> "%RCOUT%"
 echo ### FONT %HCHR%, "MS Sans Serif", 0, 0, 0x0
 echo BEGIN>> "%RCOUT%"

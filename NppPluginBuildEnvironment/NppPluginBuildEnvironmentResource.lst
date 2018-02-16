@@ -1,28 +1,19 @@
-###################################@file NppPluginBuildEnvironmentResource.lst
-###    _   _                                                               ###
-###   | | | |___ _   ___ ___ ___ _ __  ___                                 ###
-###   | | | / _ \ | | __/ _ \__ \ '_ \/ _ \                                ###
-###   | |'|  (_)  |_| _|\__ / _   | | \__| |                               ###
-###   |__ __\___/___|_| |___\___/_| |_|___/                                ###
-###                   ___                                                  ###
-###                  |   \_   _ _ __  ___ _ ___ _ __                       ###
-###                  | |\ \| | | '_ \/ __| / _ \ '_ \                      ###
-###                  | |/ /|_| | | | \_ /_  (_)  | | |                     ###
-###                  |___/\__'_|_| |_|__\__\___/_| |_|                     ###
-###                                                                        ###
-### Copyright (c) 2016 Wolfgang Dunsdon.                                   ###
-### All rights reserved.                                                   ###
-###                                                                        ###
-###                                                                        ###
-### Notepad++ Build Environment Resource Configuration List.			   ###
-###                                                                        ###
-### Use: lst2rc.bat to generate NppPluginBuildEnvironmentResource.rc	   ###
-###                                                                        ###
-###                                                            20 Aug 2016 ###
-###                                                                        ###
-##############################################################################
+###########################################################
+###      _      __  ___                   __            ###
+###     | | /| / / / _ \__ _____  ___ ___/ /__  ___     ###
+###     | |/ |/ / / // / // / _ \(_-</ _  / _ \/ _ \    ###
+###     |__/|__(_)____/\_,_/_//_/___/\_,_/\___/_//_/    ###
+###                                                     ###
+###               NppPluginBuildEnvironmentResource.lst ###
+###                                          16/02/2018 ###
+###                                                     ###
+### Notepad++ Build Environment Resource Configuration. ###
+###                                                     ###
+### Use: lst2rc.bat to generate Resource File           ###
+###                                                     ###
+###########################################################
 
-DIALOG, IDD_BUILD_SETTINGS, "Build Settings"
+DIALOG, "Build Settings"
 FBOX, BLDFIL, "Build List File:"
 TBOX, BLDBRA, "Build Branch:"
 TBOX, BLDUSR, "Build User:"
@@ -38,7 +29,7 @@ TBOX, TGTPWD, "Target Password:"
 TBOX, TGTADR, "Target Address:"
 FBOX, DBSHAN, "Configuration Database:"
 
-DIALOG, IDD_DIRECTORY_SETTINGS, "Directory Settings"
+DIALOG, "Directory Settings"
 FBOX, DIRFIL, "Directory List File:"
 DBOX, PRJDIR, "Project Directory:"
 DBOX, TMPDIR, "Temp Directory:"
@@ -51,7 +42,7 @@ DBOX, FFSDIR, "Free File Sync Directory:"
 TBOX, MAPDRV, "Build Drive:"
 TBOX, HOMDRV, "Home Drive:"
 
-DIALOG, IDD_EXECUTABLE_SETTINGS, "Executable Settings"
+DIALOG, "Executable Settings"
 FBOX, EXEFIL, "Executable List File:"
 FBOX, TTLEXE, "Teraterm Macro Executable:"
 FBOX, PLKEXE, "Putty Link Executable:"
@@ -61,7 +52,7 @@ FBOX, FFSEXE, "Free File Sync Executable:"
 TBOX, BEGCMD, "Start Command:"
 TBOX, TRMCMD, "Terminate Command:"
 
-DIALOG, IDD_MISCELLANEOUS_SETTINGS, "Miscellaneous Settings"
+DIALOG, "Miscellaneous Settings"
 FBOX, MSCFIL, "Miscellaneous List File:"
 TBOX, DBSDIR, "Target Database Directory:"
 TBOX, DBSFIL, "Database Name:"
@@ -71,10 +62,10 @@ TBOX, LOGDIR, "Log Directory:"
 TBOX, LOGFIL, "Log File:"
 TBOX, MOVLOG, "Timed File Log Directory:"
 
-DIALOG, IDD_SQL_SETTINGS, "SQL Settings"
+DIALOG, "SQL Settings"
 FBOX, SQLFIL, "SQL Settings List File:", 12
 TBX3, SQLMOD, "Module Name:", SQLTAG, "Tag:", SQLVAL, "Value:"
 
-DIALOG, IDD_CUSTOM_SETTINGS, "Custom Settings"
+DIALOG, "Custom Settings"
 FBOX, CSTFIL, "Custom Settings List File", 12
 TBX2, CSTVAR, "Variable:", CSTVAL, "Value:"

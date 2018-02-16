@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="ANSI Debug|Win32">
       <Configuration>ANSI Debug</Configuration>
@@ -26,32 +26,33 @@
     <ProjectGuid>{1590D7CD-7D3A-4AB7-A355-EE02F7FB987D}</ProjectGuid>
     <RootNamespace>NppPluginBuildEnvironment</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Installer|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ANSI Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -190,11 +191,12 @@
       <ProfileGuidedDatabase>$(OutDir)$(TargetName).pgd</ProfileGuidedDatabase>
     </Link>
     <CustomBuildStep>
-      <Command>"$(ProjectDir)..\NppPluginTools\proj2res.bat" "$(ProjectDir)$(ProjectFileName)"</Command>
+      <Command>"$(ProjectDir)..\NppPluginTools\lst2rc.bat" "$(ProjectDir)$(ProjectName)Resource.lst" &amp;&amp; "$(ProjectDir)..\NppPluginTools\rc2hpp.bat" "$(ProjectDir)$(ProjectName)Resource.rc" &amp;&amp; "$(ProjectDir)..\NppPluginTools\rc2cpp.bat" "$(ProjectDir)$(ProjectName)Resource.rc"</Command>
       <Message>Generate configuration code from resource</Message>
       <Outputs>$(ProjectDir)$(ProjectName)Resource.cpp</Outputs>
       <TreatOutputAsContent>true</TreatOutputAsContent>
-      <Inputs>$(ProjectDir)$(ProjectName)Resource.rc;%(Inputs)</Inputs>
+      <Inputs>
+      </Inputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Installer|Win32'">
@@ -258,7 +260,7 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <CustomBuildStep>
-      <Command>"$(ProjectDir)rc2cpp.bat" "$(ProjectDir)$(ProjectName)Resource.rc"</Command>
+      <Command>"$(ProjectDir)..\NppPluginTools\lst2rc.bat" "$(ProjectDir)$(ProjectName)Resource.lst" &amp;&amp; "$(ProjectDir)..\NppPluginTools\rc2hpp.bat" "$(ProjectDir)$(ProjectName)Resource.rc" &amp;&amp; "$(ProjectDir)..\NppPluginTools\rc2cpp.bat" "$(ProjectDir)$(ProjectName)Resource.rc"</Command>
       <Message>Generate code from resource</Message>
       <Outputs>$(ProjectDir)$(ProjectName)Resource.cpp</Outputs>
       <TreatOutputAsContent>true</TreatOutputAsContent>
