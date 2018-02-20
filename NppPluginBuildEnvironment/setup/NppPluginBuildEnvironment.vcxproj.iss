@@ -3,7 +3,7 @@
 
 #define MyAppName "Notepad++ Build Environment Plugin"
 #define MyAppVersion "0.1"
-#define MyAppPublisher "Hanover Displays"
+#define MyAppPublisher "Wolfgang Dunsdon"
 #define MyAppExeName "NppPluginBuildEnvironment.dll"
 
 [Setup]
@@ -15,9 +15,9 @@ AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
-DefaultDirName={pf}\Notepad++\plugins
+DefaultDirName={pf64}\Notepad++\plugins
 DefaultGroupName={#MyAppName}
-OutputBaseFilename=setup
+OutputBaseFilename=BuildEnvironmentSetup
 Compression=lzma
 SolidCompression=yes
 
@@ -25,8 +25,10 @@ SolidCompression=yes
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
-Source: "..\Unicode Release\plugins\NppPluginBuildEnvironment.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Unicode Release\x64\plugins\NppPluginBuildEnvironment.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 [Dirs]
-Name: {usercf}\Notepad++\plugins\config\BuildEnvironment
+Name: {userappdata}\Notepad++\plugins\config\BuildEnvironment
+
+
 

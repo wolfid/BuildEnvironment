@@ -51,6 +51,8 @@ echo ### ///
 echo ///>> "%CPPOUT%"
 echo ### //////////////////////////////////////////////////////////////////////////////
 echo //////////////////////////////////////////////////////////////////////////////>> "%CPPOUT%"
+echo ### #include ^<string.h^>
+echo #include ^<string.h^>>> "%CPPOUT%"
 echo ### #include "%~n1.hpp"
 echo #include "%~n1.hpp" >> "%CPPOUT%"
 echo ### #include "SettingsDlg.h"

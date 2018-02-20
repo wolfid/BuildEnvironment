@@ -39,7 +39,7 @@ public :
     void setParent(HWND parent2set);
 
 protected :
-    virtual BOOL CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam);
+    virtual INT_PTR CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam);
     void initenv();
     void showenv();
     void saveenv();

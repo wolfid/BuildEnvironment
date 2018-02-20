@@ -4,13 +4,12 @@ c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\unicode release
 c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\unicode release\npppluginbuildenvironment.obj
 c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\unicode release\staticdialog.obj
 c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\unicode release\settingsdlg.obj
-c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\unicode release\plugins\npppluginbuildenvironment.dll
-c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\unicode release\plugins\npppluginbuildenvironment.pdb
+c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\unicode release\win32\plugins\npppluginbuildenvironment.dll
+c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\unicode release\win32\plugins\npppluginbuildenvironment.pdb
 c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\npppluginbuildenvironmentresource.cpp
-c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\unicode release\plugins\npppluginbuildenvironment.lib
-c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\unicode release\plugins\npppluginbuildenvironment.exp
+c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\unicode release\win32\plugins\npppluginbuildenvironment.lib
+c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\unicode release\win32\plugins\npppluginbuildenvironment.exp
 c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\unicode release\npppluginbuildenvironmentresource.res
-c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\unicode release\npppluginbuildenvironment.vcxprojresolveassemblyreference.cache
 c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\unicode release\nppplugi.1590d7cd.tlog\cl.command.1.tlog
 c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\unicode release\nppplugi.1590d7cd.tlog\cl.read.1.tlog
 c:\source\npp-plugins\buildenvironment\npppluginbuildenvironment\unicode release\nppplugi.1590d7cd.tlog\cl.write.1.tlog

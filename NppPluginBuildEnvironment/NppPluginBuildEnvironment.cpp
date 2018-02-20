@@ -18,6 +18,7 @@
 //
 // put the headers you need here
 //
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <Shlobj.h>

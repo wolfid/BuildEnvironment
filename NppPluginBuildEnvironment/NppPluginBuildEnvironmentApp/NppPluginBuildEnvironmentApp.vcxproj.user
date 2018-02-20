@@ -4,8 +4,16 @@
     <LocalDebuggerCommandArguments>$(SolutionDir)$(Configuration)\plugins\$(SolutionName)_Debug.dll</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|x64'">
+    <LocalDebuggerCommandArguments>$(SolutionDir)$(Configuration)\$(Platform)\plugins\$(SolutionName)_Debug.dll</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">
     <LocalDebuggerCommandArguments>$(SolutionDir)$(Configuration)\plugins\$(SolutionName).dll</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'">
+    <LocalDebuggerCommandArguments>$(SolutionDir)$(Configuration)\$(Platform)\plugins\$(SolutionName).dll</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>

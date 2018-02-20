@@ -15,6 +15,10 @@
 //along with this program; if not, write to the Free Software
 //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+#undef __STDC_WANT_SECURE_LIB__
+#define __STDC_WANT_SECURE_LIB__ 1
+#include <string.h>
+
 #include <vcruntime.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -39,20 +43,20 @@ SettingsDlg::SettingsDlg(int dlgID, ENVVAR *envptr) : _envlst(envptr), DockingDl
 //----------------------------------------------//
 //-- Message pump. -----------------------------//
 //----------------------------------------------//
-BOOL CALLBACK SettingsDlg::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK SettingsDlg::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch(message)
     {
         case WM_COMMAND:
         {
-            int id = chkfldr(wParam);
+            int id = chkfldr((int)wParam);
             if(-1 != id)
             {
                 getfldr(id);
 
                 return TRUE;
             }
-            id = chkfile(wParam);
+            id = chkfile((int)wParam);
             if(-1 != id)
             {
                 getfile(id);
@@ -146,10 +150,10 @@ void makeconfigfilename(const char *name, const char *suffix, char *filename)
 //----------------------------------------------//
 //-- Compare buffers. --------------------------//
 //----------------------------------------------//
-int comparebuf(const char *buf, const TCHAR *tbuf)
+int comparebuf(const char *buf, const wchar_t *tbuf)
 {
     const char *b = buf;
-    const TCHAR *t = tbuf;
+    const wchar_t *t = tbuf;
 
     if(NULL == b && NULL == t)
     {
@@ -203,7 +207,7 @@ void SettingsDlg::initenv()
         FILE *pFile = fopen(buf, "r");
         if(NULL != pFile)
         {
-            int i = fread(buf, 1, BUFSIZE, pFile);
+            size_t i = fread(buf, 1, BUFSIZE, pFile);
 
             _envlst[envdex].value = new char[i + 1];
 
@@ -213,6 +217,11 @@ void SettingsDlg::initenv()
 
             fclose(pFile);
         }
+		else
+		{
+			_envlst[envdex].value = new char[1];
+			_envlst[envdex].value[0] = 0;
+		}
     }
 }
 
@@ -227,11 +236,14 @@ void SettingsDlg::showenv()
     {
         if(NULL != _envlst[envdex].value)
         {
-            TCHAR *env = new TCHAR[strlen(_envlst[envdex].value) + 1];
+            wchar_t *env = new wchar_t[strlen(_envlst[envdex].value) + 1];
             size_t csize = 0;
             mbstowcs_s(&csize, env, strlen(_envlst[envdex].value) + 1, _envlst[envdex].value, BUFSIZE);
-            ::SendMessage(::GetDlgItem(_hSelf, _envlst[envdex].id), WM_SETTEXT, 0, (LPARAM)env);
-            delete[] env;
+			SetWindowText(::GetDlgItem(_hSelf, _envlst[envdex].id), env);
+
+//            ::SendMessage(::GetDlgItem(_hSelf, _envlst[envdex].id), WM_SETTEXT, 0, (LPARAM)env);
+
+			delete[] env;
         }
     }
 }
@@ -288,17 +300,18 @@ void SettingsDlg::saveenv()
 {
     unsigned envdex = 0;
     char buf[BUFSIZE];
-    TCHAR tbuf[BUFSIZE];
+    wchar_t tbuf[BUFSIZE];
 
     for(; -1 != _envlst[envdex].id; ++envdex)
     {
-        int i = ::SendMessage(
-            ::GetDlgItem(
-                _hSelf,
-                _envlst[envdex].id),
-                WM_GETTEXT,
-                BUFSIZE,
-                (LPARAM)tbuf);
+#if 0
+		int i = ::GetDlgItemText(
+			_hSelf,
+			_envlst[envdex].id,
+			tbuf,
+			BUFSIZE);
+#endif
+		int i = GetWindowText(::GetDlgItem(_hSelf, _envlst[envdex].id), tbuf, BUFSIZE);
 
         if(0 != i)
         {
@@ -306,9 +319,10 @@ void SettingsDlg::saveenv()
             {
                 FILE *pFile = NULL;
 
-                i = wcslen(tbuf);
+				size_t buflen = 0;
+				buflen = wcslen(tbuf);
 
-                if(i > 0)
+                if(buflen > 0)
                 {
                     if(NULL != _envlst[envdex].value)
                     {
@@ -359,7 +373,7 @@ void SettingsDlg::saveenv()
                     _envlst[envdex].value = new char[i + 1];
 
                     char *o = _envlst[envdex].value;
-                    TCHAR *t = tbuf;
+                    wchar_t *t = tbuf;
 
                     for(; *o++ = (char)(*t++ & 0xff););
 
@@ -474,11 +488,14 @@ void SettingsDlg::getfldr(int id)
     {
         if(0 != ::SHGetPathFromIDList(pidl, tbuf))
         {
-            ::SendMessage(
+			SetWindowText(::GetDlgItem(_hSelf, id), tbuf);
+#if 0
+			::SendMessage(
                 ::GetDlgItem(_hSelf, id),
                 WM_SETTEXT,
                 0,
                 (LPARAM)tbuf);
+#endif
         }
 
         CoTaskMemFree((LPVOID)pidl);
@@ -532,12 +549,14 @@ void SettingsDlg::getfile(int id)
 
                 if(SUCCEEDED(hr))
                 {
-                    ::SendMessage(
+					SetWindowText(::GetDlgItem(_hSelf, id), pszFilePath);
+#if 0
+					::SendMessage(
                         ::GetDlgItem(_hSelf, id),
                         WM_SETTEXT,
                         0,
                         (LPARAM)pszFilePath);
-
+#endif
                     CoTaskMemFree(pszFilePath);
                 }
 

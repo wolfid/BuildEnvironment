@@ -40,6 +40,8 @@ echo ### ///
 echo ///>> "%RCOUT%"
 echo ### //////////////////////////////////////////////////////////////////////////////
 echo //////////////////////////////////////////////////////////////////////////////>> "%RCOUT%"
+echo ### #include ^<string.h^>
+echo #include ^<string.h^>>> "%RCOUT%"
 echo ### #include ^<windows.h^>
 echo #include ^<windows.h^>>> "%RCOUT%"
 echo ### #include "%LSTFILE%.hpp"

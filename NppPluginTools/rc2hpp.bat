@@ -22,8 +22,8 @@ set HPPOUT=%1
 set HPPOUT=%HPPOUT:.rc=.hpp%
 for /f "tokens=1,2,3 delims=/" %%a in ("%date:/0=/%") do (set day=%%a && set /a month=%%b && set year=%%c)
 for /f "tokens=%month%" %%a in ("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec") do set month=%%a
-echo ### ///////////////////////////////////@file %HPPOUT%
-echo ///////////////////////////////////@file %HPPOUT%> "%HPPOUT%"
+echo ### ///////////////////////////////////@file %~n1.hpp
+echo ///////////////////////////////////@file %~n1.hpp> "%HPPOUT%"
 echo ### ///
 echo ///>> "%HPPOUT%"
 echo ### /// Notepad++ Tools Environment Configuration.
