@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="menuCmdID.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NppPluginResource.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PluginInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Notepad_plus_msgs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\NppPluginTools\rc2hpp.bat">
+      <Filter>Script Files</Filter>
+    </None>
+    <None Include="..\NppPluginTools\rc2cpp.bat">
+      <Filter>Script Files</Filter>
+    </None>
+    <None Include="..\NppPluginTools\lst2rc.bat">
+      <Filter>Script Files</Filter>
+    </None>
+    <None Include="setup\NppPluginProject_Chooser.vcxproj.iss">
+      <Filter>Setup Files</Filter>
+    </None>
+    <None Include="NppPluginProject_ChooserResource.lst">
+      <Filter>Script Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\NppPluginTools\rc2hpp.readme.txt">
+      <Filter>Script Files</Filter>
+    </Text>
+    <Text Include="..\NppPluginTools\rc2cpp.readme.txt">
+      <Filter>Script Files</Filter>
+    </Text>
+    <Text Include="..\NppPluginTools\lst2rc.readme.txt">
+      <Filter>Script Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{8b390024-2bc8-444c-9b59-2a6714cb117e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script Files">
+      <UniqueIdentifier>{9040d683-308e-4ef0-9fc1-dede3ece33ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Setup Files">
+      <UniqueIdentifier>{c6a40b80-b0c0-4aa4-a219-91e4eaea4843}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{6884f76a-1bc1-40c4-8166-c9d182ae9af0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{06c872c3-4ff4-4bb2-b582-fbb1f689c1b3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="NppPluginResource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NppPluginInterface\NppPluginMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NppPluginInterface\StaticDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NppPluginInterface\SettingsDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NppPluginInterface\NppPlugin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NppPluginResource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

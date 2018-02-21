@@ -15,12 +15,17 @@
 //along with this program; if not, write to the Free Software
 //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-#include <stdio.h>
+#include <string.h>
+#include <windows.h>
+#include <vcruntime.h>
 #include <stdlib.h>
-#include <shlobj.h>
+#include <stdio.h>
+#include <Shlobj.h>
+#include <time.h>
 #include <shlwapi.h>
-
 #include "SettingsDlg.h"
+
+extern NppData nppData;
 
 static const size_t BUFSIZE = 1024;
 
@@ -35,20 +40,20 @@ SettingsDlg::SettingsDlg(int dlgID, ENVVAR *envptr) : _envlst(envptr), DockingDl
 //----------------------------------------------//
 //-- Message pump. -----------------------------//
 //----------------------------------------------//
-BOOL CALLBACK SettingsDlg::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK SettingsDlg::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch(message)
     {
         case WM_COMMAND:
         {
-            int id = chkfldr(wParam);
+            int id = chkfldr((int)wParam);
             if(-1 != id)
             {
                 getfldr(id);
 
                 return TRUE;
             }
-            id = chkfile(wParam);
+            id = chkfile((int)wParam);
             if(-1 != id)
             {
                 getfile(id);
@@ -115,34 +120,28 @@ void SettingsDlg::setParent(HWND parent2set)
 };
 
 const char *appdata = "APPDATA";
-const char *configdir = "\\Notepad++\\plugins\\config\\";
+const char *nppconfigdir = "\\Notepad++\\plugins\\config\\";
 
 //----------------------------------------------//
 //-- Create config file name. ------------------//
 //----------------------------------------------//
 void makeconfigfilename(const char *name, const char *suffix, char *filename)
 {
-    size_t size;
-    char *env;
+    const char *i;
+    const TCHAR *t;
+    char *o = filename;
 
-    if(0 == _dupenv_s(&env, &size, appdata))
+    for(i = getenv(appdata); *o++ = *i++;);
+    for(--o, i = nppconfigdir; *o++ = *i++;);
+    for(--o, t = NPP_PLUGIN_NAME; *t; t++)
     {
-        const char *i;
-        const TCHAR *t;
-        char *o = filename;
-
-        for(i = env; *o++ = *i++;);
-        for(--o, i = configdir; *o++ = *i++;);
-        for(--o, t = NPP_PLUGIN_NAME; *t; t++)
+        if(' ' != *t)
         {
-            if(' ' != *t)
-            {
-                *o++ = *(char *)t;
-            }
+            *o++ = *(char *)t;
         }
-        for(*o++ = '\\', i = name; *o++ = *i++;);
-        for(--o, i = suffix; *o++ = *i++;);
     }
+    for(*o++ = '\\', i = name; *o++ = *i++;);
+    for(--o, i = suffix; *o++ = *i++;);
 }
 
 //----------------------------------------------//
@@ -150,28 +149,43 @@ void makeconfigfilename(const char *name, const char *suffix, char *filename)
 //----------------------------------------------//
 int comparebuf(const char *buf, const wchar_t *tbuf)
 {
-    if(NULL == buf && NULL == tbuf)
+    const char *b = buf;
+    const wchar_t *t = tbuf;
+
+    if(NULL == b && NULL == t)
     {
         return 0;
     }
 
-    if(NULL == buf)
-    {
-        return -1;
-    }
-
-    if(NULL == tbuf)
+    if(NULL == b || NULL == t)
     {
         return 1;
     }
 
-    wchar_t *temp = new wchar_t[strlen(buf) + 1];
-    size_t csize = 0;
-    mbstowcs_s(&csize, temp, strlen(buf) + 1, buf, BUFSIZE);
-    int ret = wcscmp(temp, tbuf);
-    delete[] temp;
+    for(; *b && *t; b++, t++)
+    {
+        if(*b != (*t & 0xff))
+        {
+            return 1;
+        }
+    }
 
-    return ret;
+    if(0 == *b && 0 == *t)
+    {
+        return 0;
+    }
+
+    if('\n' == *b && 0 == *t)
+    {
+        return 0;
+    }
+
+    if(0 == *b && '\n' == (*t & 0xff))
+    {
+        return 0;
+    }
+
+    return 1;
 }
 
 //----------------------------------------------//
@@ -184,13 +198,13 @@ void SettingsDlg::initenv()
     for(; -1 != _envlst[envdex].id; ++envdex)
     {
         char buf[BUFSIZE];
-        FILE *pFile;
 
         makeconfigfilename(_envlst[envdex].name, ".ini", buf);
 
-        if(0 == fopen_s(&pFile, buf, "r"))
+        FILE *pFile = fopen(buf, "r");
+        if(NULL != pFile)
         {
-            int i = fread(buf, 1, BUFSIZE, pFile);
+            size_t i = fread(buf, 1, BUFSIZE, pFile);
 
             _envlst[envdex].value = new char[i + 1];
 
@@ -199,26 +213,12 @@ void SettingsDlg::initenv()
             _envlst[envdex].value[i] = 0;
 
             fclose(pFile);
-
-            if(i > 0)
-            {
-                makeconfigfilename(_envlst[envdex].name, ".lst", buf);
-
-                if (0 != fopen_s(&pFile, buf, "r"))
-                {
-                    if (0 == fopen_s(&pFile, buf, "w"))
-                    {
-                        fwrite(_envlst[envdex].value, 1, i, pFile);
-                        fwrite("\n", 1, 1, pFile);
-                        fclose(pFile);
-                    }
-                }
-                else
-                {
-                    fclose(pFile);
-                }
-            }
         }
+		else
+		{
+			_envlst[envdex].value = new char[1];
+			_envlst[envdex].value[0] = 0;
+		}
     }
 }
 
@@ -236,8 +236,11 @@ void SettingsDlg::showenv()
             wchar_t *env = new wchar_t[strlen(_envlst[envdex].value) + 1];
             size_t csize = 0;
             mbstowcs_s(&csize, env, strlen(_envlst[envdex].value) + 1, _envlst[envdex].value, BUFSIZE);
-            ::SendMessage(::GetDlgItem(_hSelf, _envlst[envdex].id), WM_SETTEXT, 0, (LPARAM)env);
-            delete[] env;
+			SetWindowText(::GetDlgItem(_hSelf, _envlst[envdex].id), env);
+
+//            ::SendMessage(::GetDlgItem(_hSelf, _envlst[envdex].id), WM_SETTEXT, 0, (LPARAM)env);
+
+			delete[] env;
         }
     }
 }
@@ -252,22 +255,22 @@ void SettingsDlg::initlst()
     for(; -1 != _envlst[envdex].id; ++envdex)
     {
         char buf[BUFSIZE];
-        FILE *pFile;
-
         makeconfigfilename(_envlst[envdex].name, ".lst", buf);
-        if(0 == fopen_s(&pFile, buf, "r"))
+
+        FILE *pFile = fopen(buf, "r");
+        if(NULL != pFile)
         {
             while(NULL != fgets(buf, BUFSIZE, pFile))
             {
                 size_t csize = strlen(buf);
 
-                if(csize > 0 && '\n' != buf[0])
+                if(csize > 0)
                 {
-                    wchar_t *env = new wchar_t[++csize];
+                    TCHAR *env = new TCHAR[++csize];
 
                     for(; 0 != csize--;)
                     {
-                        env[csize] = (wchar_t)buf[csize];
+                        env[csize] = (TCHAR)buf[csize];
                     }
 
                     ::SendMessage(
@@ -292,35 +295,39 @@ void SettingsDlg::initlst()
 //----------------------------------------------//
 void SettingsDlg::saveenv()
 {
-    FILE *pFile = NULL;
     unsigned envdex = 0;
     char buf[BUFSIZE];
     wchar_t tbuf[BUFSIZE];
 
     for(; -1 != _envlst[envdex].id; ++envdex)
     {
-        int i = ::SendMessage(
-            ::GetDlgItem(
-                _hSelf,
-                _envlst[envdex].id),
-                WM_GETTEXT,
-                BUFSIZE,
-                (LPARAM)tbuf);
+#if 0
+		int i = ::GetDlgItemText(
+			_hSelf,
+			_envlst[envdex].id,
+			tbuf,
+			BUFSIZE);
+#endif
+		int i = GetWindowText(::GetDlgItem(_hSelf, _envlst[envdex].id), tbuf, BUFSIZE);
 
         if(0 != i)
         {
             if(0 != comparebuf(_envlst[envdex].value, tbuf))
             {
-                i = wcslen(tbuf);
+                FILE *pFile = NULL;
 
-                if(i > 0)
+				size_t buflen = 0;
+				buflen = wcslen(tbuf);
+
+                if(buflen > 0)
                 {
                     if(NULL != _envlst[envdex].value)
                     {
                         bool gotit = false;
 
                         makeconfigfilename(_envlst[envdex].name, ".lst", buf);
-                        if(0 == fopen_s(&pFile, buf, "r"))
+                        pFile = fopen(buf, "r");
+                        if(NULL != pFile)
                         {
                             while(NULL != fgets(buf, BUFSIZE, pFile))
                             {
@@ -339,12 +346,13 @@ void SettingsDlg::saveenv()
                             else
                             {
                                 makeconfigfilename(_envlst[envdex].name, ".lst", buf);
-                                freopen_s(&pFile, buf, "a", pFile);
+                                pFile = freopen(buf, "a", pFile);
                             }
                         }
                         else
                         {
-                            if(0 == fopen_s(&pFile, buf, "w"))
+                            pFile = fopen(buf, "w");
+                            if(NULL != pFile)
                             {
                                 fwrite(_envlst[envdex].value, 1, strlen(_envlst[envdex].value), pFile);
                                 fwrite("\n", 1, 1, pFile);
@@ -371,10 +379,8 @@ void SettingsDlg::saveenv()
                         fwrite(_envlst[envdex].value, 1, strlen(_envlst[envdex].value), pFile);
                         fwrite("\n", 1, 1, pFile);
                         fclose(pFile);
-                        pFile = NULL;
 
                         tbuf[i] = '\n';
-                        tbuf[i + 1] = '\0';
 
                         ::SendMessage(
                             ::GetDlgItem(
@@ -391,7 +397,8 @@ void SettingsDlg::saveenv()
                 }
 
                 makeconfigfilename(_envlst[envdex].name, ".ini", buf);
-                if(0 == fopen_s(&pFile, buf, "w"))
+                pFile = fopen(buf, "w");
+                if(NULL != pFile)
                 {
                     if(i > 0)
                     {
@@ -399,30 +406,15 @@ void SettingsDlg::saveenv()
                     }
 
                     fclose(pFile);
-                    pFile = NULL;
                 }
-            }
-        }
-        else
-        {
-            if(NULL != _envlst[envdex].value)
-            {
-                delete[] _envlst[envdex].value;
-                _envlst[envdex].value = NULL;
-            }
-
-            makeconfigfilename(_envlst[envdex].name, ".ini", buf);
-            if (0 == fopen_s(&pFile, buf, "w"))
-            {
-                fclose(pFile);
-                pFile = NULL;
             }
         }
     }
 
     if(NULL != _envlst[0].value)
     {
-        if(0 == fopen_s(&pFile, _envlst[0].value, "w"))
+        FILE *pFile = fopen(_envlst[0].value, "w");
+        if(NULL != pFile)
         {
             for(envdex = 1; -1 != _envlst[envdex].id; ++envdex)
             {
@@ -493,11 +485,14 @@ void SettingsDlg::getfldr(int id)
     {
         if(0 != ::SHGetPathFromIDList(pidl, tbuf))
         {
-            ::SendMessage(
+			SetWindowText(::GetDlgItem(_hSelf, id), tbuf);
+#if 0
+			::SendMessage(
                 ::GetDlgItem(_hSelf, id),
                 WM_SETTEXT,
                 0,
                 (LPARAM)tbuf);
+#endif
         }
 
         CoTaskMemFree((LPVOID)pidl);
@@ -551,12 +546,14 @@ void SettingsDlg::getfile(int id)
 
                 if(SUCCEEDED(hr))
                 {
-                    ::SendMessage(
+					SetWindowText(::GetDlgItem(_hSelf, id), pszFilePath);
+#if 0
+					::SendMessage(
                         ::GetDlgItem(_hSelf, id),
                         WM_SETTEXT,
                         0,
                         (LPARAM)pszFilePath);
-
+#endif
                     CoTaskMemFree(pszFilePath);
                 }
 

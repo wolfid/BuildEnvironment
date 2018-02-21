@@ -37,31 +37,26 @@
     <ClInclude Include="DockingFeature\SettingsDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NppPluginBuildEnvironmentResource.hpp">
+    <ClInclude Include="NppPluginResource.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NppPluginBuildEnvironmentMain.cpp">
+    <ClCompile Include="NppPluginResource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DockingFeature\StaticDialog.cpp">
+    <ClCompile Include="..\NppPluginInterface\NppPluginMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DockingFeature\SettingsDlg.cpp">
+    <ClCompile Include="..\NppPluginInterface\StaticDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NppPluginBuildEnvironmentResource.cpp">
+    <ClCompile Include="..\NppPluginInterface\SettingsDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NppPluginBuildEnvironment.cpp">
+    <ClCompile Include="..\NppPluginInterface\NppPlugin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="NppPluginBuildEnvironmentResource.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="setup\NppPluginBuildEnvironment.vcxproj.iss">
@@ -90,5 +85,10 @@
     <Text Include="..\NppPluginTools\rc2hpp.readme.txt">
       <Filter>Script Files</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NppPluginResource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

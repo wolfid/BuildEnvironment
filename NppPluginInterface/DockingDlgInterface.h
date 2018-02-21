@@ -29,95 +29,95 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 class DockingDlgInterface : public StaticDialog
 {
 public:
-    DockingDlgInterface(): StaticDialog() {};
-    DockingDlgInterface(int dlgID): StaticDialog(), _dlgID(dlgID) {};
-    
-    virtual void init(HINSTANCE hInst, HWND parent)
-    {
-        StaticDialog::init(hInst, parent);
-        ::GetModuleFileName((HMODULE)hInst, _moduleName, MAX_PATH);
-        lstrcpy(_moduleName, PathFindFileName(_moduleName));
-    }
+	DockingDlgInterface() : StaticDialog() {};
+	DockingDlgInterface(int dlgID) : StaticDialog(), _dlgID(dlgID) {};
 
-    void create(tTbData * data, bool isRTL = false){
-        StaticDialog::create(_dlgID, isRTL);
-        ::GetWindowText(_hSelf, _pluginName, sizeof(_pluginName));
+	virtual void init(HINSTANCE hInst, HWND parent)
+	{
+		StaticDialog::init(hInst, parent);
+		::GetModuleFileName((HMODULE)hInst, _moduleName, MAX_PATH);
+		lstrcpy(_moduleName, PathFindFileName(_moduleName));
+	}
 
-        // user information
-        data->hClient		= _hSelf;
-        data->pszName		= _pluginName;
+	void create(tTbData * data, bool isRTL = false) {
+		StaticDialog::create(_dlgID, isRTL);
+		::GetWindowText(_hSelf, _pluginName, sizeof(_pluginName));
 
-        // supported features by plugin
-        data->uMask			= 0;
+		// user information
+		data->hClient = _hSelf;
+		data->pszName = _pluginName;
 
-        // additional info
-        data->pszAddInfo	= NULL;
-        _data = data;
+		// supported features by plugin
+		data->uMask = 0;
 
-    };
+		// additional info
+		data->pszAddInfo = NULL;
+		_data = data;
 
-    virtual void updateDockingDlg(void) {
-        ::SendMessage(_hParent, NPPM_DMMUPDATEDISPINFO, 0, (LPARAM)_hSelf);
-    }
+	};
 
-    virtual void destroy() {
-    };
+	virtual void updateDockingDlg(void) {
+		::SendMessage(_hParent, NPPM_DMMUPDATEDISPINFO, 0, (LPARAM)_hSelf);
+	}
 
-    virtual void display(bool toShow = true) const {
-        ::SendMessage(_hParent, toShow?NPPM_DMMSHOW:NPPM_DMMHIDE, 0, (LPARAM)_hSelf);
-    };
+	virtual void destroy() {
+	};
 
-    const TCHAR * getPluginFileName() const {
-        return _moduleName;
-    };
+	virtual void display(bool toShow = true) const {
+		::SendMessage(_hParent, toShow ? NPPM_DMMSHOW : NPPM_DMMHIDE, 0, (LPARAM)_hSelf);
+	};
 
-protected :
-    virtual BOOL CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
-    {
-        switch (message) 
-        {
+	const TCHAR * getPluginFileName() const {
+		return _moduleName;
+	};
 
-            case WM_NOTIFY: 
-            {
-                LPNMHDR	pnmh	= (LPNMHDR)lParam;
+protected:
+	virtual INT_PTR CALLBACK run_dlgProc(UINT message, WPARAM /*wParam*/, LPARAM lParam)
+	{
+		switch (message)
+		{
 
-                if (pnmh->hwndFrom == _hParent)
-                {
-                    switch (LOWORD(pnmh->code))
-                    {
-                        case DMN_CLOSE:
-                        {
-                            break;
-                        }
-                        case DMN_FLOAT:
-                        {
-                            _isFloating = true;
-                            break;
-                        }
-                        case DMN_DOCK:
-                        {
-                            _isFloating = false;
-                            break;
-                        }
-                        default:
-                            break;
-                    }
-                }
-                break;
-            }
-            default:
-                break;
-        }
-        return FALSE;
-    };
-    
-    // Handles
-    HWND			_HSource;
-    tTbData*		_data;
-    int				_dlgID;
-    bool            _isFloating;
-    TCHAR            _moduleName[MAX_PATH];
-    TCHAR			_pluginName[MAX_PATH];
+		case WM_NOTIFY:
+		{
+			LPNMHDR	pnmh = (LPNMHDR)lParam;
+
+			if (pnmh->hwndFrom == _hParent)
+			{
+				switch (LOWORD(pnmh->code))
+				{
+				case DMN_CLOSE:
+				{
+					break;
+				}
+				case DMN_FLOAT:
+				{
+					_isFloating = true;
+					break;
+				}
+				case DMN_DOCK:
+				{
+					_isFloating = false;
+					break;
+				}
+				default:
+					break;
+				}
+			}
+			break;
+		}
+		default:
+			break;
+		}
+		return FALSE;
+	};
+
+	// Handles
+	HWND			_HSource;
+	tTbData*		_data;
+	int				_dlgID;
+	bool            _isFloating;
+	TCHAR            _moduleName[MAX_PATH];
+	TCHAR			_pluginName[MAX_PATH];
 };
 
 #endif // DOCKINGDLGINTERFACE_H
