@@ -1,0 +1,40 @@
+###########################################################
+###      _      __  ___                   __            ###
+###     | | /| / / / _ \__ _____  ___ ___/ /__  ___     ###
+###     | |/ |/ / / // / // / _ \(_-</ _  / _ \/ _ \    ###
+###     |__/|__(_)____/\_,_/_//_/___/\_,_/\___/_//_/    ###
+###                                                     ###
+###              NppPluginTools_EnvironmentResource.lst ###
+###                                          22/02/2018 ###
+###                                                     ###
+### Notepad++ Tools Environment Resource Configuration. ###
+###                                                     ###
+### Use: lst2rc.bat to generate Resource File           ###
+###                                                     ###
+###########################################################
+
+DIALOG, "Tools Environment"
+FBOX, PLKEXE, "Plink Executable:"
+FBOX, NCTEXE, "NetCat Executable:"
+FBOX, CRLEXE, "Curl Executable:"
+FBOX, VBMEXE, "Vbox Manager Executable:"
+FBOX, ZIPEXE, "Zip Executable:"
+TBOX, NPPEXE, "Using Notepadd++:"
+TBOX, DEVCOM, "Common Direcory Name:"
+TBOX, QMDLST, "Quiet Modes:"
+TBOX, NMDLST, "Noisy Modes:"
+TBOX, IMDLST, "Interactive Modes:"
+TBOX, AMDLST, "Active Modes:"
+TBOX, DSPMOD, "Display Mode:"
+TBOX, INTMOD, "Interactive Mode:"
+TBOX, ISSDBG, "Debug Code:"
+TBOX, ISSFIN, "Final Release Code:"
+TBOX, ISSPRC, "Release Candidate Code:"
+TBOX, ISSPRD, "Production Dev. Code:"
+TBOX, SVNLOG, "Log Command:"
+TBOX, SVNCKO, "Check Out Command:"
+TBOX, SVNEOL, "Comment Indicator:"
+TBOX, SVNLST, "List Command:"
+TBOX, SVNLTT, "Use Latest:"
+TBOX, TAGDEF, "Default Tag:"
+TBOX, TAGNUL, "Null Tag:"

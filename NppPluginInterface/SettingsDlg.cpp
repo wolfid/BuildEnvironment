@@ -24,6 +24,7 @@
 #include <time.h>
 #include <shlwapi.h>
 #include "SettingsDlg.h"
+#include "NppPluginResource.hpp"
 
 extern NppData nppData;
 
@@ -133,13 +134,24 @@ void makeconfigfilename(const char *name, const char *suffix, char *filename)
 
     for(i = getenv(appdata); *o++ = *i++;);
     for(--o, i = nppconfigdir; *o++ = *i++;);
-    for(--o, t = NPP_PLUGIN_NAME; *t; t++)
+    for(--o, t = getName(); *t; t++)
     {
         if(' ' != *t)
         {
             *o++ = *(char *)t;
         }
     }
+	if (NULL != getProject())
+	{
+		*o++ = '\\';
+		for (t = getProject(); *t; t++)
+		{
+			if (' ' != *t)
+			{
+				*o++ = *(char *)t;
+			}
+		}
+	}
     for(*o++ = '\\', i = name; *o++ = *i++;);
     for(--o, i = suffix; *o++ = *i++;);
 }

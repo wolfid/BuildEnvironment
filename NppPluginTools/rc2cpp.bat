@@ -17,17 +17,6 @@ echo ###                                                     ###
 echo ###########################################################
 if [%1] equ [] goto :ERROR_NO_RC
 if [%~x1] neq [.rc] goto :ERROR_NO_RC
-set CYGRES=%~d1
-for %%a in ("A:=a" "B:=b" "C:=c" "D:=d" "E:=e" "F:=f" "G:=g" "H:=h" "I:=i" "J:=j" "K:=k" "L:=l" "M:=m" "N:=n" "O:=o" "P:=p" "Q:=q" "R:=r" "S:=s" "T:=t" "U:=u" "V:=v" "W:=w" "X:=x" "Y:=y" "Z:=z") do call set CYGRES=%%CYGRES:%%~a%%
-set CYGRES="/cygdrive/%CYGRES%%~p1%~n1%~x1"
-set CYGRES=%CYGRES:\=/%
-set RCFILE=%~1
-set RCTEMP=%RCFILE:.rc=.tmp%
-echo ### cygwin path of %1
-echo ### is %CYGRES%
-echo ###
-C:\cygwin64\bin\grep -E "CAPTION ""|COMBOBOX" %CYGRES% > "%RCTEMP%"
-set IDDCNT=0
 
 set CPPEXTN=cpp
 set HPPEXTN=hpp
@@ -35,19 +24,31 @@ set HPPEXTN=hpp
 set CPPOUT=%~p1\%~n1.%CPPEXTN%
 
 set TITLE=%~p1
-set TITLEN=10
+set TTLBEG=10
 setlocal EnableDelayedExpansion
-:TITLELOOP
-if "!TITLE:~-%TITLEN%,9!"=="NppPlugin" goto :GOTTITLE
-set /a TITLEN+=1
-goto :TITLELOOP
-:GOTTITLE
-set /a TITLEN-=9
-set TITLE=!TITLE:~-%TITLEN%,-1!
-endlocal & set TITLE=%TITLE%
+:TTLBEGLPP
+if "!TITLE:~-%TTLBEG%,9!"=="NppPlugin" goto :GOTTTLBEG
+set /a TTLBEG+=1
+goto :TTLBEGLPP
+:GOTTTLBEG
+set /a TTLBEG-=9
+set TTLEND=%TTLBEG%
+:TTLENDLPP
+if "!TITLE:~-%TTLEND%,1!"=="\" goto :GOTTTLEND
+set /a TTLEND-=1
+goto :TTLENDLPP
+:GOTTTLEND
+set /a TTLEND-=1
+if not "%TTLEND%"=="0" (set PROJECT=!TITLE:~-%TTLEND%,-1!
+) else set PROJECT=
+set /a TTLEND+=1
+set TITLE=!TITLE:~-%TTLBEG%,-%TTLEND%!
+endlocal & set TITLE=%TITLE:_= %& set PROJECT=%PROJECT%
 
-echo ### ////////////////////////////////////////////////////@file %~n1.%CPPEXTN%
-echo ////////////////////////////////////////////////////@file %~n1.%CPPEXTN%> "%CPPOUT%"
+set IDDCNT=0
+
+echo ### ///////////////////////////////////////////////////@file %~n1.%CPPEXTN%
+echo ///////////////////////////////////////////////////@file %~n1.%CPPEXTN%> "%CPPOUT%"
 echo ### ///
 echo ///>> "%CPPOUT%"
 echo ### /// Notepad++ Plugin Configuration.
@@ -72,10 +73,14 @@ echo ### #include "%~n1.%HPPEXTN%"
 echo #include "%~n1.%HPPEXTN%" >> "%CPPOUT%"
 echo ### #include "SettingsDlg.h"
 echo #include "SettingsDlg.h" >> "%CPPOUT%"
-echo ### const TCHAR NPP_PLUGIN_NAME[] = TEXT("%TITLE%");
-echo const TCHAR NPP_PLUGIN_NAME[] = TEXT("%TITLE%"); >> "%CPPOUT%"
+echo ### TCHAR NPP_PLUGIN_NAME[] = TEXT("%TITLE%");
+echo TCHAR NPP_PLUGIN_NAME[] = TEXT("%TITLE%"); >> "%CPPOUT%"
+if "%PROJECT%"=="" (echo ### TCHAR NPP_PROJECT_NAME[] = TEXT(""^)^;
+) else echo ### TCHAR NPP_PROJECT_NAME[] = TEXT("%PROJECT%");
+if "%PROJECT%"=="" (echo TCHAR NPP_PROJECT_NAME[] = TEXT(""^)^; >> "%CPPOUT%"
+) else echo TCHAR NPP_PROJECT_NAME[] = TEXT("%PROJECT%"); >> "%CPPOUT%"
 setlocal EnableDelayedExpansion
-for /f "usebackq tokens=1,2,3,4,5,6,7,8,9" %%a in ("%RCTEMP%") do call :GENERATE_CPP %%a %%b %%c %%d %%e %%f %%g %%h %%i
+for /f "usebackq tokens=1,2,3,4,5,6,7,8,9 eol=/" %%a in (%1) do call :GENERATE_CPP %%a %%b %%c %%d %%e %%f %%g %%h %%i
 echo ###    { -1, -1, -1, NULL, NULL, NULL }
 echo     { -1, -1, -1, NULL, NULL, NULL }>> "%CPPOUT%"
 echo ### };

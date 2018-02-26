@@ -26,8 +26,8 @@ set TITLE=%TITLE:NppPlugin=%
 set TITLE=%TITLE:Resource=%
 set TITLE=%TITLE:_= %
 set RCOUT=%~p1\%NPPPLUGIN%%RESOURCE%.%RCEXTN%
-echo ### ///////////////////////////////////////////////////@file %NPPPLUGIN%%RESOURCE%.%RCEXTN%
-echo ////////////////////////////////////@file %NPPPLUGIN%%RESOURCE%.%RCEXTN%> "%RCOUT%"
+echo ### ////////////////////////////////////////////////////////////////// @file %NPPPLUGIN%%RESOURCE%.%RCEXTN%
+echo /////////////////////////////////////////////////// @file %NPPPLUGIN%%RESOURCE%.%RCEXTN%> "%RCOUT%"
 echo ### ///
 echo ///>> "%RCOUT%"
 echo ### /// Notepad++ Plugin %TITLE% Configuration.
@@ -55,11 +55,11 @@ set XSPC=10
 set WCBX=300
 set WCBM=140
 set DCBX=120
-set XCBX=100
+set XCBX=120
 set XTXT=20
 set WCHR=18
 set HCHR=9
-set WTXT=80
+set WTXT=100
 set XOKP=200
 set XCNP=240
 set XBTN=400
@@ -69,7 +69,7 @@ set HBTN=13
 set XDLG=40
 set YDLG=40
 set WDLG=500
-set HDLG=400
+set HDLG=600
 set IDPX=ID
 set TBTN="&..."
 set TBOK="&OK"

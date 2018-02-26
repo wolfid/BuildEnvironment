@@ -28,7 +28,7 @@
 //-------------------------------------//
 // Here define your plugin name
 //
-extern const TCHAR NPP_PLUGIN_NAME[];
+extern TCHAR NPP_PLUGIN_NAME[];
 
 //-----------------------------------------------//
 //-- STEP 2. DEFINE YOUR PLUGIN COMMAND NUMBER --//
