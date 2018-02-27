@@ -34,7 +34,7 @@ typedef struct _ENVVAR
 class SettingsDlg : public DockingDlgInterface
 {
 public :
-    SettingsDlg(int dlgID, ENVVAR *envptr);
+    SettingsDlg(int dlgID, ENVVAR *envptr, TCHAR *project);
     virtual void display(bool toShow = true);
     void setParent(HWND parent2set);
 
@@ -52,6 +52,7 @@ protected :
 private :
     BOOL _bShown;
     ENVVAR *_envlst;
+    TCHAR *_project;
 };
 
 typedef struct _ENVSET

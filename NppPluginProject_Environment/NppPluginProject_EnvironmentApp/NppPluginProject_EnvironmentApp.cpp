@@ -35,7 +35,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
     // Initialize global strings
     LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadString(hInstance, IDC_NPPPLUGINPROJECT_CHOOSERAPP, szWindowClass, MAX_LOADSTRING);
+    LoadString(hInstance, IDC_NPPPLUGINPROJECT_ENVIRONMENTAPP, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
 
     // Perform application initialization:
@@ -44,7 +44,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
         return 1;
     }
 
-    hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_NPPPLUGINPROJECT_CHOOSERAPP));
+    hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_NPPPLUGINPROJECT_ENVIRONMENTAPP));
 
     // Main message loop:
     while(GetMessage(&msg, NULL, 0, 0))
@@ -78,7 +78,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_NPPPLUGINPROJECT_CHOOSERAPP));
     wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    wcex.lpszMenuName = MAKEINTRESOURCE(IDC_NPPPLUGINPROJECT_CHOOSERAPP);
+    wcex.lpszMenuName = MAKEINTRESOURCE(IDC_NPPPLUGINPROJECT_ENVIRONMENTAPP);
     wcex.lpszClassName = szWindowClass;
     wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -186,6 +186,27 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             break;
         case IDM_PROJECT:
             pfunclst[0]._pFunc();
+            break;
+        case IDM_TOOLS_SETTINGS:
+            pfunclst[1]._pFunc();
+            break;
+        case IDM_TEST_BUILD:
+            pfunclst[2]._pFunc();
+            break;
+        case IDM_TEST_ISSUE:
+            pfunclst[3]._pFunc();
+            break;
+        case IDM_SKYVIPER_GENERAL:
+            pfunclst[4]._pFunc();
+            break;
+        case IDM_SKYVIPER_CONFIG:
+            pfunclst[5]._pFunc();
+            break;
+        case IDM_SKYVIPER_BUILD:
+            pfunclst[6]._pFunc();
+            break;
+        case IDM_SKYVIPER_ISSUE:
+            pfunclst[7]._pFunc();
             break;
         default:
             return DefWindowProc(hWnd, message, wParam, lParam);

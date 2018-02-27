@@ -52,7 +52,7 @@ echo ### #include "%NPPPLUGIN%%RESOURCE%.%HPPEXTN%"
 echo #include "%NPPPLUGIN%%RESOURCE%.%HPPEXTN%">> "%RCOUT%"
 set YINC=20
 set XSPC=10
-set WCBX=300
+set WCBX=400
 set WCBM=140
 set DCBX=120
 set XCBX=120
@@ -60,15 +60,15 @@ set XTXT=20
 set WCHR=18
 set HCHR=9
 set WTXT=100
-set XOKP=200
-set XCNP=240
-set XBTN=400
+set XOKP=260
+set XCNP=300
+set XBTN=520
 set WSBN=40
 set WBTN=20
 set HBTN=13
 set XDLG=40
 set YDLG=40
-set WDLG=500
+set WDLG=600
 set HDLG=600
 set IDPX=ID
 set TBTN="&..."
@@ -102,6 +102,7 @@ exit /b 0
 if "%YPOS%" neq "%YINC%" call :DIALOG_END
 set DIALOG_ID=%2
 set DIALOG_ID=%DIALOG_ID: =_%
+call :TOUPPER DIALOG_ID
 set DIALOG_ID=IDD_%DIALOG_ID:"=%
 echo %DIALOG_ID% DIALOGEX %XDLG% %YDLG% %WDLG% %HDLG%>> "%RCOUT%"
 echo ### %DIALOG_ID% DIALOGEX %XDLG% %YDLG% %WDLG% %HDLG%
@@ -118,6 +119,8 @@ echo ### BEGIN
 set /a YPOS+=%YINC%
 exit /b
 :DIALOG_END
+set DIALOG_ID=xxx
+set VARNAME=
 call :BTTN K, O, %TBOK%, %XOKP%, %YPOS%, %WSBN%, %HBTN%
 call :BTTN CEL, CAN, %TBCN%, %XCNP%, %YPOS%, %WSBN%, %HBTN%
 echo END>> "%RCOUT%"
@@ -187,17 +190,28 @@ if "%SUBR%" equ "%TEXT%" shift
 shift
 goto :XXXX_LOOP
 :TEXT
-echo LTEXT           %3, %IDPX%%2%1, %4, %5, %6, %7 1>> "%RCOUT%"
-echo ### LTEXT           %3, %IDPX%%2%1, %4, %5, %6, %7
+call :BRACKET_STRIP %2
+echo LTEXT           %3, %IDPX%%DIALOG_ID:~3%%VARNAME%%1, %4, %5, %6, %7 1>> "%RCOUT%"
+echo ### LTEXT           %3, %IDPX%%DIALOG_ID:~3%%VARNAME%%1, %4, %5, %6, %7
 exit /b
 :CBOX
-echo COMBOBOX        %IDPX%%2%1, %3, %4, %5, %6, CBS_DROPDOWN>> "%RCOUT%"
-echo ### COMBOBOX        %IDPX%%2%1, %3, %4, %5, %6, CBS_DROPDOWN
+call :BRACKET_STRIP %2
+echo COMBOBOX        %IDPX%%DIALOG_ID:~3%%VARNAME%%1, %3, %4, %5, %6, CBS_DROPDOWN>> "%RCOUT%"
+echo ### COMBOBOX        %IDPX%%DIALOG_ID:~3%%VARNAME%%1, %3, %4, %5, %6, CBS_DROPDOWN
 exit /b
 :BTTN
-echo DEFPUSHBUTTON   %3, %IDPX%%2%1, %4, %5, %6, %7, BS_NOTIFY>> "%RCOUT%"
-echo ### DEFPUSHBUTTON   %3, %IDPX%%2%1, %4, %5, %6, %7, BS_NOTIFY
+call :BRACKET_STRIP %2
+echo DEFPUSHBUTTON   %3, %IDPX%%DIALOG_ID:~3%%VARNAME%%1, %4, %5, %6, %7, BS_NOTIFY>> "%RCOUT%"
+echo ### DEFPUSHBUTTON   %3, %IDPX%%DIALOG_ID:~3%%VARNAME%%1, %4, %5, %6, %7, BS_NOTIFY
 exit /b
+:TOUPPER
+for %%i in ("a=A" "b=B" "c=C" "d=D" "e=E" "f=F" "g=G" "h=H" "i=I" "j=J" "k=K" "l=L" "m=M" "n=N" "o=O" "p=P" "q=Q" "r=R" "s=S" "t=T" "u=U" "v=V" "w=W" "x=X" "y=Y" "z=Z") do call set "%~1=%%%~1:%%~i%%"
+exit /b
+:BRACKET_STRIP
+set VARNAME=%1
+set VARNAME=%VARNAME:[=_%
+set VARNAME=%VARNAME:]=_%
+exit /b 0
 :ERROR_NO_LST
 echo ###
 echo ###                                                 Error No List File...

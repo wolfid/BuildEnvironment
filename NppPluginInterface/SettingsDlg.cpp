@@ -33,7 +33,7 @@ static const size_t BUFSIZE = 1024;
 //----------------------------------------------//
 //-- CTOR. -------------------------------------//
 //----------------------------------------------//
-SettingsDlg::SettingsDlg(int dlgID, ENVVAR *envptr) : _envlst(envptr), DockingDlgInterface(dlgID)
+SettingsDlg::SettingsDlg(int dlgID, ENVVAR *envptr, TCHAR *project) : _envlst(envptr), DockingDlgInterface(dlgID), _project(project)
 {
     initenv();
 };
@@ -126,32 +126,39 @@ const char *nppconfigdir = "\\Notepad++\\plugins\\config\\";
 //----------------------------------------------//
 //-- Create config file name. ------------------//
 //----------------------------------------------//
-void makeconfigfilename(const char *name, const char *suffix, char *filename)
+void makeconfigfilename(const char *name, const char *suffix, char *filename, const TCHAR *plugin, const TCHAR *project)
 {
     const char *i;
     const TCHAR *t;
     char *o = filename;
+    char *pvardata;
+    size_t varlen;
 
-    for(i = getenv(appdata); *o++ = *i++;);
+    if(0 != _dupenv_s(&pvardata, &varlen, appdata))
+    {
+        return;
+    }
+
+    for(i = pvardata; *o++ = *i++;);
     for(--o, i = nppconfigdir; *o++ = *i++;);
-    for(--o, t = getName(); *t; t++)
+    for(--o, t = plugin; *t; t++)
     {
         if(' ' != *t)
         {
             *o++ = *(char *)t;
         }
     }
-	if (NULL != getProject())
-	{
-		*o++ = '\\';
-		for (t = getProject(); *t; t++)
-		{
-			if (' ' != *t)
-			{
-				*o++ = *(char *)t;
-			}
-		}
-	}
+    if (NULL != project)
+    {
+        *o++ = '\\';
+        for (t = project; *t; t++)
+        {
+            if (' ' != *t)
+            {
+                *o++ = *(char *)t;
+            }
+        }
+    }
     for(*o++ = '\\', i = name; *o++ = *i++;);
     for(--o, i = suffix; *o++ = *i++;);
 }
@@ -211,10 +218,10 @@ void SettingsDlg::initenv()
     {
         char buf[BUFSIZE];
 
-        makeconfigfilename(_envlst[envdex].name, ".ini", buf);
+        makeconfigfilename(_envlst[envdex].name, ".ini", buf, getName(), _project);
 
-        FILE *pFile = fopen(buf, "r");
-        if(NULL != pFile)
+        FILE *pFile;
+        if(0 == fopen_s(&pFile, buf, "r"))
         {
             size_t i = fread(buf, 1, BUFSIZE, pFile);
 
@@ -226,11 +233,11 @@ void SettingsDlg::initenv()
 
             fclose(pFile);
         }
-		else
-		{
-			_envlst[envdex].value = new char[1];
-			_envlst[envdex].value[0] = 0;
-		}
+        else
+        {
+            _envlst[envdex].value = new char[1];
+            _envlst[envdex].value[0] = 0;
+        }
     }
 }
 
@@ -248,11 +255,11 @@ void SettingsDlg::showenv()
             wchar_t *env = new wchar_t[strlen(_envlst[envdex].value) + 1];
             size_t csize = 0;
             mbstowcs_s(&csize, env, strlen(_envlst[envdex].value) + 1, _envlst[envdex].value, BUFSIZE);
-			SetWindowText(::GetDlgItem(_hSelf, _envlst[envdex].id), env);
+            SetWindowText(::GetDlgItem(_hSelf, _envlst[envdex].id), env);
 
 //            ::SendMessage(::GetDlgItem(_hSelf, _envlst[envdex].id), WM_SETTEXT, 0, (LPARAM)env);
 
-			delete[] env;
+            delete[] env;
         }
     }
 }
@@ -267,9 +274,11 @@ void SettingsDlg::initlst()
     for(; -1 != _envlst[envdex].id; ++envdex)
     {
         char buf[BUFSIZE];
-        makeconfigfilename(_envlst[envdex].name, ".lst", buf);
+        makeconfigfilename(_envlst[envdex].name, ".lst", buf, getName(), _project);
 
-        FILE *pFile = fopen(buf, "r");
+        FILE *pFile;
+
+        fopen_s(&pFile, buf, "r");
         if(NULL != pFile)
         {
             while(NULL != fgets(buf, BUFSIZE, pFile))
@@ -314,13 +323,13 @@ void SettingsDlg::saveenv()
     for(; -1 != _envlst[envdex].id; ++envdex)
     {
 #if 0
-		int i = ::GetDlgItemText(
-			_hSelf,
-			_envlst[envdex].id,
-			tbuf,
-			BUFSIZE);
+        int i = ::GetDlgItemText(
+            _hSelf,
+            _envlst[envdex].id,
+            tbuf,
+            BUFSIZE);
 #endif
-		int i = GetWindowText(::GetDlgItem(_hSelf, _envlst[envdex].id), tbuf, BUFSIZE);
+        int i = GetWindowText(::GetDlgItem(_hSelf, _envlst[envdex].id), tbuf, BUFSIZE);
 
         if(0 != i)
         {
@@ -328,8 +337,8 @@ void SettingsDlg::saveenv()
             {
                 FILE *pFile = NULL;
 
-				size_t buflen = 0;
-				buflen = wcslen(tbuf);
+                size_t buflen = 0;
+                buflen = wcslen(tbuf);
 
                 if(buflen > 0)
                 {
@@ -337,8 +346,8 @@ void SettingsDlg::saveenv()
                     {
                         bool gotit = false;
 
-                        makeconfigfilename(_envlst[envdex].name, ".lst", buf);
-                        pFile = fopen(buf, "r");
+                        makeconfigfilename(_envlst[envdex].name, ".lst", buf, getName(), _project);
+                        fopen_s(&pFile, buf, "r");
                         if(NULL != pFile)
                         {
                             while(NULL != fgets(buf, BUFSIZE, pFile))
@@ -357,13 +366,13 @@ void SettingsDlg::saveenv()
                             }
                             else
                             {
-                                makeconfigfilename(_envlst[envdex].name, ".lst", buf);
-                                pFile = freopen(buf, "a", pFile);
+                                makeconfigfilename(_envlst[envdex].name, ".lst", buf, getName(), _project);
+                                freopen_s(&pFile, buf, "a", pFile);
                             }
                         }
                         else
                         {
-                            pFile = fopen(buf, "w");
+                            fopen_s(&pFile, buf, "w");
                             if(NULL != pFile)
                             {
                                 fwrite(_envlst[envdex].value, 1, strlen(_envlst[envdex].value), pFile);
@@ -408,8 +417,8 @@ void SettingsDlg::saveenv()
                     delete[] _envlst[envdex].value;
                 }
 
-                makeconfigfilename(_envlst[envdex].name, ".ini", buf);
-                pFile = fopen(buf, "w");
+                makeconfigfilename(_envlst[envdex].name, ".ini", buf, getName(), _project);
+                fopen_s(&pFile, buf, "w");
                 if(NULL != pFile)
                 {
                     if(i > 0)
@@ -425,7 +434,8 @@ void SettingsDlg::saveenv()
 
     if(NULL != _envlst[0].value)
     {
-        FILE *pFile = fopen(_envlst[0].value, "w");
+        FILE *pFile;
+        fopen_s(&pFile, _envlst[0].value, "w");
         if(NULL != pFile)
         {
             for(envdex = 1; -1 != _envlst[envdex].id; ++envdex)
@@ -497,9 +507,9 @@ void SettingsDlg::getfldr(int id)
     {
         if(0 != ::SHGetPathFromIDList(pidl, tbuf))
         {
-			SetWindowText(::GetDlgItem(_hSelf, id), tbuf);
+            SetWindowText(::GetDlgItem(_hSelf, id), tbuf);
 #if 0
-			::SendMessage(
+            ::SendMessage(
                 ::GetDlgItem(_hSelf, id),
                 WM_SETTEXT,
                 0,
@@ -558,9 +568,9 @@ void SettingsDlg::getfile(int id)
 
                 if(SUCCEEDED(hr))
                 {
-					SetWindowText(::GetDlgItem(_hSelf, id), pszFilePath);
+                    SetWindowText(::GetDlgItem(_hSelf, id), pszFilePath);
 #if 0
-					::SendMessage(
+                    ::SendMessage(
                         ::GetDlgItem(_hSelf, id),
                         WM_SETTEXT,
                         0,

@@ -4,7 +4,7 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NppPluginTools_EnvironmentApp.cpp">
+    <ClCompile Include="NppPluginProject_EnvironmentApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -43,7 +43,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="NppPluginTools_EnvironmentApp.rc">
+    <ResourceCompile Include="NppPluginProject_EnvironmentApp.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>

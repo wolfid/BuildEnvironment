@@ -17,7 +17,6 @@ echo ###                                                     ###
 echo ###########################################################
 if [%1] equ [] goto :ERROR_NO_RC
 if [%~x1] neq [.rc] goto :ERROR_NO_RC
-
 set NPPPLUGIN=NppPlugin
 set RESOURCE=Resource
 set CPPEXTN=cpp
@@ -25,9 +24,7 @@ set HPPEXTN=hpp
 set SENTINEL=%NPPPLUGIN%%RESOURCE%
 call :TOUPPER SENTINEL
 set SENTINEL=__%SENTINEL%__
-
 set HPPOUT=%~p1\%NPPPLUGIN%%RESOURCE%.%HPPEXTN%
-
 echo ### ////////////////////////////////////////////////////@file %NPPPLUGIN%%RESOURCE%.%HPPEXTN%
 echo ////////////////////////////////////////////////////@file %NPPPLUGIN%%RESOURCE%.%HPPEXTN%> "%HPPOUT%"
 echo ### ///

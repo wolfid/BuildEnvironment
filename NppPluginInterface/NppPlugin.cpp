@@ -29,6 +29,8 @@
 #include "PluginDefinition.h"
 #include "SettingsDlg.h"
 
+#define FUNCNUM 20
+
 //
 // Build environment configuration
 //
@@ -82,8 +84,18 @@ void settings6() { _settings(6); }
 void settings7() { _settings(7); }
 void settings8() { _settings(8); }
 void settings9() { _settings(9); }
+void settings10() { _settings(10); }
+void settings11() { _settings(11); }
+void settings12() { _settings(12); }
+void settings13() { _settings(13); }
+void settings14() { _settings(14); }
+void settings15() { _settings(15); }
+void settings16() { _settings(16); }
+void settings17() { _settings(17); }
+void settings18() { _settings(18); }
+void settings19() { _settings(19); }
 
-void(*settingslst[10])() =
+void(*settingslst[])() =
 {
     settings0,
     settings1,
@@ -94,7 +106,17 @@ void(*settingslst[10])() =
     settings6,
     settings7,
     settings8,
-    settings9
+    settings9,
+    settings10,
+    settings11,
+    settings12,
+    settings13,
+    settings14,
+    settings15,
+    settings16,
+    settings17,
+    settings18,
+    settings19
 };
 
 //
@@ -131,7 +153,7 @@ void commandMenuInit()
     //            ShortcutKey *shortcut,          // optional. Define a shortcut to trigger this command
     //            bool check0nInit                // optional. Make this menu item be checked visually
     //            );
-    for(unsigned dex = nbFunc > 10? 10: nbFunc; 0 != dex--;)
+    for(unsigned dex = nbFunc > FUNCNUM? FUNCNUM: nbFunc; 0 != dex--;)
     {
         lstrcpy(funcItem[dex]._itemName, envsetlst[dex].txt);
         funcItem[dex]._pFunc = settingslst[dex];

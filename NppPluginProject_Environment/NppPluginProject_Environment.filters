@@ -24,10 +24,10 @@
     <None Include="..\NppPluginTools\lst2rc.bat">
       <Filter>Script Files</Filter>
     </None>
-    <None Include="setup\NppPluginTools_Environment.vcxproj.iss">
+    <None Include="setup\NppPluginProject_Environment.vcxproj.iss">
       <Filter>Setup Files</Filter>
     </None>
-    <None Include="NppPluginTools_EnvironmentResource.lst">
+    <None Include="NppPluginProject_EnvironmentResource.lst">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

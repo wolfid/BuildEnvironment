@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppPluginProject_Environment", "NppPluginProject_Environment.vcxproj", "{1590D7CD-7D3A-4AB7-A355-EE02F7FB987D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppPluginProject_EnvironmentApp", "NppPluginProject_EnvironmentApp\NppPluginProject_EnvironmentApp.vcxproj", "{7C8A2F80-2028-4A9C-8951-8E4999DD1C84}"
-	ProjectSection(ProjectDependencies) = postProject
-		{1590D7CD-7D3A-4AB7-A355-EE02F7FB987D} = {1590D7CD-7D3A-4AB7-A355-EE02F7FB987D}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,12 +25,16 @@ Global
 		{1590D7CD-7D3A-4AB7-A355-EE02F7FB987D}.Unicode Release|x64.Build.0 = Unicode Release|x64
 		{7C8A2F80-2028-4A9C-8951-8E4999DD1C84}.Unicode Debug|Win32.ActiveCfg = Unicode Debug|Win32
 		{7C8A2F80-2028-4A9C-8951-8E4999DD1C84}.Unicode Debug|Win32.Build.0 = Unicode Debug|Win32
+		{7C8A2F80-2028-4A9C-8951-8E4999DD1C84}.Unicode Debug|Win32.Deploy.0 = Unicode Debug|Win32
 		{7C8A2F80-2028-4A9C-8951-8E4999DD1C84}.Unicode Debug|x64.ActiveCfg = Unicode Debug|x64
 		{7C8A2F80-2028-4A9C-8951-8E4999DD1C84}.Unicode Debug|x64.Build.0 = Unicode Debug|x64
+		{7C8A2F80-2028-4A9C-8951-8E4999DD1C84}.Unicode Debug|x64.Deploy.0 = Unicode Debug|x64
 		{7C8A2F80-2028-4A9C-8951-8E4999DD1C84}.Unicode Release|Win32.ActiveCfg = Unicode Release|Win32
 		{7C8A2F80-2028-4A9C-8951-8E4999DD1C84}.Unicode Release|Win32.Build.0 = Unicode Release|Win32
+		{7C8A2F80-2028-4A9C-8951-8E4999DD1C84}.Unicode Release|Win32.Deploy.0 = Unicode Release|Win32
 		{7C8A2F80-2028-4A9C-8951-8E4999DD1C84}.Unicode Release|x64.ActiveCfg = Unicode Release|x64
 		{7C8A2F80-2028-4A9C-8951-8E4999DD1C84}.Unicode Release|x64.Build.0 = Unicode Release|x64
+		{7C8A2F80-2028-4A9C-8951-8E4999DD1C84}.Unicode Release|x64.Deploy.0 = Unicode Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

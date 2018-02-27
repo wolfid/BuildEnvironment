@@ -17,12 +17,9 @@ echo ###                                                     ###
 echo ###########################################################
 if [%1] equ [] goto :ERROR_NO_RC
 if [%~x1] neq [.rc] goto :ERROR_NO_RC
-
 set CPPEXTN=cpp
 set HPPEXTN=hpp
-
 set CPPOUT=%~p1\%~n1.%CPPEXTN%
-
 set TITLE=%~p1
 set TTLBEG=10
 setlocal EnableDelayedExpansion
@@ -44,9 +41,7 @@ if not "%TTLEND%"=="0" (set PROJECT=!TITLE:~-%TTLEND%,-1!
 set /a TTLEND+=1
 set TITLE=!TITLE:~-%TTLBEG%,-%TTLEND%!
 endlocal & set TITLE=%TITLE:_= %& set PROJECT=%PROJECT%
-
 set IDDCNT=0
-
 echo ### ///////////////////////////////////////////////////@file %~n1.%CPPEXTN%
 echo ///////////////////////////////////////////////////@file %~n1.%CPPEXTN%> "%CPPOUT%"
 echo ### ///
@@ -98,8 +93,9 @@ set IDDINC=0
 set IDDVAR=!IDDVAR[%IDDINC%]!
 set IDDVAR=%IDDVAR: =_%
 set IDDVAR=%IDDVAR:"=%
-echo ###    { TEXT(!IDDVAR[%IDDINC%]!), SettingsDlg(IDD_%IDDVAR%, ENVVAR_%IDDVAR%) },
-echo     { TEXT(!IDDVAR[%IDDINC%]!), SettingsDlg(IDD_%IDDVAR%, ENVVAR_%IDDVAR%) }, >> "%CPPOUT%"
+call :TOUPPER IDDVAR
+echo ###    { TEXT(!IDDVAR[%IDDINC%]!), SettingsDlg(IDD_%IDDVAR%, ENVVAR_%IDDVAR%, TEXT(!IDDVAR[%IDDINC%]!)) },
+echo     { TEXT(!IDDVAR[%IDDINC%]!), SettingsDlg(IDD_%IDDVAR%, ENVVAR_%IDDVAR%, TEXT(!IDDVAR[%IDDINC%]!)) }, >> "%CPPOUT%"
 set /a IDDINC+=1
 if "%IDDINC%" neq "%IDDCNT%" goto :IDDCNT
 endlocal
@@ -111,16 +107,17 @@ goto :EOF
     if "%1" equ "COMBOBOX" goto :COMBOBOX
     exit /b 0
 :CAPTION
-    set IDDVAR[%IDDCNT%]=%2
+    set IDDVAR=%2
+    set IDDVAR[%IDDCNT%]=%IDDVAR%
+    set IDDVAR=%IDDVAR: =_%
+    set IDDVAR=%IDDVAR:"=%
+    call :TOUPPER IDDVAR
     if "%IDDCNT%" equ "0" goto :CAPTION1
     echo ###    { -1, -1, -1, NULL, NULL, NULL }
     echo     { -1, -1, -1, NULL, NULL, NULL }>> "%CPPOUT%"
     echo ### };
     echo }; >> "%CPPOUT%"
 :CAPTION1
-    set IDDVAR=!IDDVAR[%IDDCNT%]!
-    set IDDVAR=%IDDVAR: =_%
-    set IDDVAR=%IDDVAR:"=%
     echo ### ENVVAR ENVVAR_%IDDVAR%[] =
     echo ENVVAR ENVVAR_%IDDVAR%[] =>> "%CPPOUT%"
     echo ### {
@@ -130,24 +127,40 @@ goto :EOF
     exit /b
 :COMBOBOX
     set ENVVAR=%2
-    if "%ENVVAR:~10,1%" equ "C" goto :CBOX
-    if "%ENVVAR:~10,1%" equ "D" goto :DBOX
-    if "%ENVVAR:~10,1%" equ "F" goto :FBOX
+    set ENVBEG=11
+    set ENVDEX=
+    if "%ENVVAR:~-6,2%" equ "__" call :ENVDEX
+    if "%ENVVAR:~-4,1%" equ "C" goto :CBOX
+    if "%ENVVAR:~-4,1%" equ "D" goto :DBOX
+    if "%ENVVAR:~-4,1%" equ "F" goto :FBOX
     exit /b
+:ENVDEX
+    set /a ENVBEG-=3
+:ENVDEXLPP
+    if "!ENVVAR:~-%ENVBEG%,1!"=="_" goto :ENVDEXBEG
+    set /a ENVBEG+=1
+    goto :ENVDEXLPP
+:ENVDEXBEG
+    set /a ENVBEG-=1
+    set ENVDEX=[!ENVVAR:~-%ENVBEG%,-6!]
+    set /a ENVBEG+=7
+    exit /b 0
 :CBOX
-    echo ###    { %ENVVAR%, -1, -1, "%ENVVAR:~3,6%", NULL, NULL },
-    echo     { %ENVVAR%, -1, -1, "%ENVVAR:~3,6%", NULL, NULL },>> "%CPPOUT%"
+    echo ###    { %ENVVAR%, -1, -1, "!ENVVAR:~-%ENVBEG%,6!%ENVDEX%", NULL, NULL },
+    echo     { %ENVVAR%, -1, -1, "!ENVVAR:~-%ENVBEG%,6!%ENVDEX%", NULL, NULL },>> "%CPPOUT%"
     exit /b
 :DBOX
-    echo ###    { %ENVVAR%, -1, %ENVVAR:DBOX=BTTN%, "%ENVVAR:~3,6%", NULL, "%ENVVAR:~3,3%DRV" },
-    echo     { %ENVVAR%, %ENVVAR:DBOX=BTTN%, -1, "%ENVVAR:~3,6%", NULL, "%ENVVAR:~3,3%DRV" },>> "%CPPOUT%"
+    echo ###    { %ENVVAR%, -1, %ENVVAR:DBOX=BTTN%, "!ENVVAR:~-%ENVBEG%,6!%ENVDEX%", NULL, "!ENVVAR:~-%ENVBEG%,3!%DRV%ENVDEX%" },
+    echo     { %ENVVAR%, %ENVVAR:DBOX=BTTN%, -1, "!ENVVAR:~-%ENVBEG%,6!%ENVDEX%", NULL, "!ENVVAR:~-%ENVBEG%,3!DRV%ENVDEX%" },>> "%CPPOUT%"
     exit /b
 :FBOX
-    echo ###    { %ENVVAR%, %ENVVAR:FBOX=BTTN%, -1, "%ENVVAR:~3,6%", NULL, NULL },
-    echo     { %ENVVAR%, -1, %ENVVAR:FBOX=BTTN%, "%ENVVAR:~3,6%", NULL, NULL },>> "%CPPOUT%"
+    echo ###    { %ENVVAR%, %ENVVAR:FBOX=BTTN%, -1, "!ENVVAR:~-%ENVBEG%,6!%ENVDEX%", NULL, NULL },
+    echo     { %ENVVAR%, -1, %ENVVAR:FBOX=BTTN%, "!ENVVAR:~-%ENVBEG%,6!%ENVDEX%", NULL, NULL },>> "%CPPOUT%"
+    exit /b
+:TOUPPER
+    for %%i in ("a=A" "b=B" "c=C" "d=D" "e=E" "f=F" "g=G" "h=H" "i=I" "j=J" "k=K" "l=L" "m=M" "n=N" "o=O" "p=P" "q=Q" "r=R" "s=S" "t=T" "u=U" "v=V" "w=W" "x=X" "y=Y" "z=Z") do call set "%~1=%%%~1:%%~i%%"
     exit /b
 :ERROR_NO_RC
 echo ###
 echo ###                                                   No Resource File...
 echo ###
-goto :EOF
