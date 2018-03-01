@@ -157,6 +157,10 @@ void makeconfigfilename(const char *name, const char *suffix, char *filename, co
             {
                 *o++ = *(char *)t;
             }
+            else
+            {
+                *o++ = '\\';
+            }
         }
     }
     for(*o++ = '\\', i = name; *o++ = *i++;);

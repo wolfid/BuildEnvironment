@@ -187,16 +187,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         case IDM_PROJECT:
             pfunclst[0]._pFunc();
             break;
-        case IDM_TOOLS_SETTINGS:
+        case IDM_TOOLS:
             pfunclst[1]._pFunc();
             break;
-        case IDM_TEST_BUILD:
+        case IDM_TEST:
             pfunclst[2]._pFunc();
             break;
         case IDM_TEST_ISSUE:
             pfunclst[3]._pFunc();
             break;
-        case IDM_SKYVIPER_GENERAL:
+        case IDM_SKYVIPER:
             pfunclst[4]._pFunc();
             break;
         case IDM_SKYVIPER_CONFIG:
@@ -207,6 +207,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             break;
         case IDM_SKYVIPER_ISSUE:
             pfunclst[7]._pFunc();
+            break;
+        case IDM_RECOIL:
+            pfunclst[8]._pFunc();
+            break;
+        case IDM_MEBO2:
+            pfunclst[9]._pFunc();
+            break;
+        case IDM_GRUMBLIES:
+            pfunclst[10]._pFunc();
+            break;
+        case IDM_POMSIES:
+            pfunclst[11]._pFunc();
+            break;
+        case IDM_SKYVIPERGPS:
+            pfunclst[12]._pFunc();
             break;
         default:
             return DefWindowProc(hWnd, message, wParam, lParam);

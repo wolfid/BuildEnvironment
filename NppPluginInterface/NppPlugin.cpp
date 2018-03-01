@@ -29,7 +29,7 @@
 #include "PluginDefinition.h"
 #include "SettingsDlg.h"
 
-#define FUNCNUM 20
+#define FUNCNUM 30
 
 //
 // Build environment configuration
@@ -94,8 +94,18 @@ void settings16() { _settings(16); }
 void settings17() { _settings(17); }
 void settings18() { _settings(18); }
 void settings19() { _settings(19); }
+void settings20() { _settings(20); }
+void settings21() { _settings(21); }
+void settings22() { _settings(22); }
+void settings23() { _settings(23); }
+void settings24() { _settings(24); }
+void settings25() { _settings(25); }
+void settings26() { _settings(26); }
+void settings27() { _settings(27); }
+void settings28() { _settings(28); }
+void settings29() { _settings(29); }
 
-void(*settingslst[])() =
+void(*settingslst[FUNCNUM])() =
 {
     settings0,
     settings1,
@@ -116,7 +126,17 @@ void(*settingslst[])() =
     settings16,
     settings17,
     settings18,
-    settings19
+    settings19,
+    settings20,
+    settings21,
+    settings22,
+    settings23,
+    settings24,
+    settings25,
+    settings26,
+    settings27,
+    settings28,
+    settings29
 };
 
 //
