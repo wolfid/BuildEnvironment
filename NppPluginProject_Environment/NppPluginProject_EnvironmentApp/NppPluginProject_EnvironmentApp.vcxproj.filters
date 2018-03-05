@@ -12,9 +12,6 @@
     <ClInclude Include="..\notepad-plus-plus\PowerEditor\src\WinControls\DockingWnd\DockingManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\PluginInterface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>

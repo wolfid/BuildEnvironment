@@ -214,14 +214,44 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         case IDM_MEBO2:
             pfunclst[9]._pFunc();
             break;
-        case IDM_GRUMBLIES:
+        case IDM_MEBO2_CONFIG:
             pfunclst[10]._pFunc();
             break;
-        case IDM_POMSIES:
+        case IDM_MEBO2_BUILD:
             pfunclst[11]._pFunc();
             break;
-        case IDM_SKYVIPERGPS:
+        case IDM_MEBO2_ISSUE:
             pfunclst[12]._pFunc();
+            break;
+        case IDM_GRUMBLIES:
+            pfunclst[13]._pFunc();
+            break;
+        case IDM_GRUMBLIES_CONFIG:
+            pfunclst[14]._pFunc();
+            break;
+        case IDM_GRUMBLIES_ISSUE:
+            pfunclst[15]._pFunc();
+            break;
+        case IDM_POMSIES:
+            pfunclst[16]._pFunc();
+            break;
+        case IDM_POMSIES_CONFIG:
+            pfunclst[17]._pFunc();
+            break;
+        case IDM_POMSIES_ISSUE:
+            pfunclst[18]._pFunc();
+            break;
+        case IDM_SKYVIPERGPS:
+            pfunclst[19]._pFunc();
+            break;
+        case IDM_SKYVIPERGPS_CONFIG:
+            pfunclst[20]._pFunc();
+            break;
+        case IDM_SKYVIPERGPS_BUILD:
+            pfunclst[21]._pFunc();
+            break;
+        case IDM_SKYVIPERGPS_ISSUE:
+            pfunclst[22]._pFunc();
             break;
         default:
             return DefWindowProc(hWnd, message, wParam, lParam);

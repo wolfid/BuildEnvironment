@@ -167,10 +167,9 @@
     <CustomBuildStep>
       <Command>"$(ProjectDir)..\NppPluginTools\lst2rc.bat" "$(ProjectDir)$(ProjectName)Resource.lst" &amp;&amp; "$(ProjectDir)..\NppPluginTools\rc2hpp.bat" "$(ProjectDir)NppPluginResource.rc" &amp;&amp; "$(ProjectDir)..\NppPluginTools\rc2cpp.bat" "$(ProjectDir)NppPluginResource.rc"</Command>
       <Message>Generate resource configuration</Message>
-      <Outputs>$(ProjectDir)$(ProjectName)Resource.cpp</Outputs>
+      <Outputs>$(ProjectDir)$(ProjectName)Resource.rc;$(ProjectDir)$(ProjectName)Resource.hpp;$(ProjectDir)$(ProjectName)Resource.cpp</Outputs>
       <TreatOutputAsContent>true</TreatOutputAsContent>
-      <Inputs>
-      </Inputs>
+      <Inputs>$(ProjectDir)$(ProjectName)Resource.lst</Inputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'">
@@ -205,10 +204,9 @@
     <CustomBuildStep>
       <Command>"$(ProjectDir)..\NppPluginTools\lst2rc.bat" "$(ProjectDir)$(ProjectName)Resource.lst" &amp;&amp; "$(ProjectDir)..\NppPluginTools\rc2hpp.bat" "$(ProjectDir)NppPluginResource.rc" &amp;&amp; "$(ProjectDir)..\NppPluginTools\rc2cpp.bat" "$(ProjectDir)NppPluginResource.rc"</Command>
       <Message>Generate resource configuration</Message>
-      <Outputs>$(ProjectDir)$(ProjectName)Resource.cpp</Outputs>
+      <Outputs>$(ProjectDir)$(ProjectName)Resource.rc;$(ProjectDir)$(ProjectName)Resource.hpp;$(ProjectDir)$(ProjectName)Resource.cpp</Outputs>
       <TreatOutputAsContent>true</TreatOutputAsContent>
-      <Inputs>
-      </Inputs>
+      <Inputs>$(ProjectDir)$(ProjectName)Resource.lst</Inputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">
@@ -235,8 +233,9 @@
     <CustomBuildStep>
       <Command>"$(ProjectDir)..\NppPluginTools\lst2rc.bat" "$(ProjectDir)$(ProjectName)Resource.lst" &amp;&amp; "$(ProjectDir)..\NppPluginTools\rc2hpp.bat" "$(ProjectDir)NppPluginResource.rc" &amp;&amp; "$(ProjectDir)..\NppPluginTools\rc2cpp.bat" "$(ProjectDir)NppPluginResource.rc"</Command>
       <Message>Generate resource configuration</Message>
-      <Outputs>$(ProjectDir)$(ProjectName)Resource.cpp</Outputs>
+      <Outputs>$(ProjectDir)$(ProjectName)Resource.rc;$(ProjectDir)$(ProjectName)Resource.hpp;$(ProjectDir)$(ProjectName)Resource.cpp</Outputs>
       <TreatOutputAsContent>true</TreatOutputAsContent>
+      <Inputs>$(ProjectDir)$(ProjectName)Resource.lst</Inputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|x64'">
@@ -261,8 +260,9 @@
     <CustomBuildStep>
       <Command>"$(ProjectDir)..\NppPluginTools\lst2rc.bat" "$(ProjectDir)$(ProjectName)Resource.lst" &amp;&amp; "$(ProjectDir)..\NppPluginTools\rc2hpp.bat" "$(ProjectDir)NppPluginResource.rc" &amp;&amp; "$(ProjectDir)..\NppPluginTools\rc2cpp.bat" "$(ProjectDir)NppPluginResource.rc"</Command>
       <Message>Generate resource configuration</Message>
-      <Outputs>$(ProjectDir)$(ProjectName)Resource.cpp</Outputs>
+      <Outputs>$(ProjectDir)$(ProjectName)Resource.rc;$(ProjectDir)$(ProjectName)Resource.hpp;$(ProjectDir)$(ProjectName)Resource.cpp</Outputs>
       <TreatOutputAsContent>true</TreatOutputAsContent>
+      <Inputs>$(ProjectDir)$(ProjectName)Resource.lst</Inputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
